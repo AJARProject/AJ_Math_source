@@ -4,7 +4,7 @@
 			"type": "method",
 			"id": 2147483643,
 			"previousTabType": "method",
-			"previousTabID": 2147483646,
+			"previousTabID": 2147483645,
 			"codeDescriptor": {
 				"type": 1,
 				"methodName": "AJ_Math_BuildComponent"
@@ -12,7 +12,7 @@
 		},
 		{
 			"type": "method",
-			"id": 2147483646,
+			"id": 2147483645,
 			"codeDescriptor": {
 				"type": 1,
 				"methodName": "Math"

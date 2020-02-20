@@ -4,7 +4,6 @@
   //
   // This method generates a version of the component
 
-
 ARRAY TEXT:C222($_list_components;0)
 
 COMPONENT LIST:C1001($_list_components)
