@@ -1,0 +1,25 @@
+﻿{
+	"map": [
+		{
+			"id": 2147483647,
+			"path": "Sources/Methods/zero_fill_right_shift.4dm"
+		},
+		{
+			"id": 2147483646,
+			"path": "Sources/Methods/Math.4dm"
+		},
+		{
+			"id": 2147483645,
+			"path": "Sources/Methods/LongInt2BinaryString.4dm"
+		},
+		{
+			"id": 2147483644,
+			"path": "Sources/Methods/AJ_Math_info.4dm"
+		},
+		{
+			"id": 2147483643,
+			"path": "Sources/Methods/AJ_Math_BuildComponent.4dm"
+		}
+	],
+	"arch64": true
+}

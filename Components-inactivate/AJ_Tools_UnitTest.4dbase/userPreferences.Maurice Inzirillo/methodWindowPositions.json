@@ -1,0 +1,38 @@
+﻿{
+	"Sources/Methods/_AJ_Tools_UT_assert.4dm": {
+		"left": 1169,
+		"top": 165,
+		"width": 1330,
+		"height": 928
+	},
+	"Sources/Methods/AJ_Tools_UT_assert.4dm": {
+		"left": 1169,
+		"top": 165,
+		"width": 1330,
+		"height": 928
+	},
+	"Sources/Methods/AJ_Tools_UT_runAll.4dm": {
+		"left": 1169,
+		"top": 165,
+		"width": 1330,
+		"height": 928
+	},
+	"Sources/Methods/AJ_Tools_UT_fetchResults_cs.4dm": {
+		"left": 1169,
+		"top": 165,
+		"width": 1330,
+		"height": 928
+	},
+	"Sources/Methods/AJ_Tools_UT_parseResults.4dm": {
+		"left": 1169,
+		"top": 165,
+		"width": 1330,
+		"height": 928
+	},
+	"Sources/Methods/AJ_Tools_UT_getResultText.4dm": {
+		"left": 1169,
+		"top": 165,
+		"width": 1330,
+		"height": 928
+	}
+}

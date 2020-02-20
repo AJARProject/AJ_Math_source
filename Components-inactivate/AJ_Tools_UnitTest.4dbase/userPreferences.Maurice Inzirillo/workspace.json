@@ -1,0 +1,65 @@
+﻿{
+	"editors": [
+		{
+			"type": "method",
+			"id": 2147483636,
+			"previousTabType": "method",
+			"previousTabID": 2147483642,
+			"codeDescriptor": {
+				"type": 1,
+				"methodName": "AJ_Tools_UT_getResultText"
+			}
+		},
+		{
+			"type": "method",
+			"id": 2147483642,
+			"previousTabType": "method",
+			"previousTabID": 2147483637,
+			"codeDescriptor": {
+				"type": 1,
+				"methodName": "AJ_Tools_UT_parseResults"
+			}
+		},
+		{
+			"type": "method",
+			"id": 2147483637,
+			"previousTabType": "method",
+			"previousTabID": 2147483646,
+			"codeDescriptor": {
+				"type": 1,
+				"methodName": "AJ_Tools_UT_fetchResults_cs"
+			}
+		},
+		{
+			"type": "method",
+			"id": 2147483646,
+			"previousTabType": "method",
+			"previousTabID": 2147483631,
+			"codeDescriptor": {
+				"type": 1,
+				"methodName": "AJ_Tools_UT_runAll"
+			}
+		},
+		{
+			"type": "method",
+			"id": 2147483631,
+			"previousTabType": "method",
+			"previousTabID": 2147483633,
+			"codeDescriptor": {
+				"type": 1,
+				"methodName": "AJ_Tools_UT_assert"
+			}
+		},
+		{
+			"type": "method",
+			"id": 2147483633,
+			"codeDescriptor": {
+				"type": 1,
+				"methodName": "_AJ_Tools_UT_assert"
+			}
+		},
+		{
+			"type": "explorer"
+		}
+	]
+}

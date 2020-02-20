@@ -1,0 +1,30 @@
+﻿[
+	{
+		"line": 26,
+		"method": {
+			"type": 1,
+			"methodName": "_Math_imul"
+		}
+	},
+	{
+		"line": 31,
+		"method": {
+			"type": 1,
+			"methodName": "_Math_imul"
+		}
+	},
+	{
+		"line": 35,
+		"method": {
+			"type": 1,
+			"methodName": "_Math_imul"
+		}
+	},
+	{
+		"line": 9,
+		"method": {
+			"type": 1,
+			"methodName": "_Math_imul"
+		}
+	}
+]
