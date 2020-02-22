@@ -1,30 +1,16 @@
 ﻿[
 	{
-		"line": 26,
+		"line": 11,
 		"method": {
 			"type": 1,
-			"methodName": "_Math_imul"
+			"methodName": "test"
 		}
 	},
 	{
-		"line": 31,
+		"line": 17,
 		"method": {
 			"type": 1,
-			"methodName": "_Math_imul"
-		}
-	},
-	{
-		"line": 35,
-		"method": {
-			"type": 1,
-			"methodName": "_Math_imul"
-		}
-	},
-	{
-		"line": 9,
-		"method": {
-			"type": 1,
-			"methodName": "_Math_imul"
+			"methodName": "test"
 		}
 	}
 ]

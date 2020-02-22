@@ -22,6 +22,7 @@ C_TEXT:C284($1;$text)
 C_OBJECT:C1216($2;$o)
 C_COLLECTION:C1488($col)
 C_REAL:C285($a;$b;$y)
+C_LONGINT:C283($a_l;$b_l)
 C_VARIANT:C1683($value)
 
   // ------------------Constructor---------------------
@@ -68,6 +69,7 @@ If (This:C1470[""]=Null:C1517)
 		"exp";Formula:C1597(Math ("exp";New object:C1471("num";$1)).value);\
 		"expm1";Formula:C1597(Math ("expm1";New object:C1471("num";$1)).value);\
 		"hypot";Formula:C1597(Math ("hypot";New object:C1471("num";$1)).value);\
+		"imul";Formula:C1597(Math ("imul";New object:C1471("num1";$1;"num2";$2)).value);\
 		"log1p";Formula:C1597(Math ("log1p";New object:C1471("num";$1)).value);\
 		"max";Formula:C1597(Math ("max";New object:C1471("num";$1)).value);\
 		"min";Formula:C1597(Math ("min";New object:C1471("num";$1)).value);\
@@ -287,6 +289,12 @@ Else
 						Else 
 							
 					End case 
+					  //______________________________________________________
+				: ($1="imul")
+					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul
+					$a_l:=$2.num1
+					$b_l:=$2.num2
+					$o.value:=$a_l*$b_l
 					  //______________________________________________________
 				: ($1="log1p")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log1p
