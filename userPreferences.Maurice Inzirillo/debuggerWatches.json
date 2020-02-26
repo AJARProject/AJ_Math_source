@@ -1,39 +1,10 @@
 ﻿[
 	{
 		"type": 66,
-		"formula": "$2.num"
-	},
-	{
-		"type": 66,
-		"formula": "$vtype"
-	},
-	{
-		"type": 66,
-		"formula": "$name"
-	},
-	{
-		"type": 66,
 		"formula": "$o.value"
 	},
 	{
 		"type": 66,
-		"formula": "MAXINT:K35:1"
-	},
-	{
-		"type": 66,
-		"formula": "Random:C100"
-	},
-	{
-		"type": 66,
-		"formula": "o.value"
-	},
-	{
-		"type": 66,
-		"formula": "Count parameters:C259"
-	},
-	{
-		"type": 66,
-		"formula": "$test",
-		"expanded": true
+		"formula": "$2"
 	}
 ]

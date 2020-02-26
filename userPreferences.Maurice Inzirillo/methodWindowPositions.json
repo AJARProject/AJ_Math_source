@@ -1,9 +1,9 @@
 ﻿{
 	"Sources/Methods/Math.4dm": {
 		"left": 354,
-		"top": 153,
-		"width": 1414,
-		"height": 922
+		"top": 179,
+		"width": 1688,
+		"height": 899
 	},
 	"Sources/Methods/Launch_UT.4dm": {
 		"left": 1571,
@@ -294,21 +294,21 @@
 		"height": 1124
 	},
 	"Sources/Methods/AJ_Math_info.4dm": {
-		"left": 446,
-		"top": 442,
-		"width": 1414,
-		"height": 1024
+		"left": 354,
+		"top": 179,
+		"width": 1688,
+		"height": 899
 	},
 	"Sources/Methods/AJ_Math_BuildComponent.4dm": {
 		"left": 354,
-		"top": 153,
-		"width": 1414,
-		"height": 922
+		"top": 179,
+		"width": 1688,
+		"height": 899
 	},
 	"Sources/Methods/test.4dm": {
 		"left": 354,
-		"top": 128,
-		"width": 1414,
-		"height": 1005
+		"top": 179,
+		"width": 1688,
+		"height": 899
 	}
 }

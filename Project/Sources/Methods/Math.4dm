@@ -80,9 +80,11 @@ If (This:C1470[""]=Null:C1517)
 		"sinh";Formula:C1597(Math ("sinh";New object:C1471("num";$1)).value);\
 		"sqrt";Formula:C1597(Math ("sqrt";New object:C1471("num";$1)).value);\
 		"tanh";Formula:C1597(Math ("tanh";New object:C1471("num";$1)).value);\
-		"trunc";Formula:C1597(Math ("trunc";New object:C1471("num";$1)).value)\
+		"trunc";Formula:C1597(Math ("trunc";New object:C1471("num";$1)).value);\
+		"spherodistance";Formula:C1597(Math ("spherodistance";$1).value)\
 		)
 	
+	  //"spherodistance";Formula(Math ("spherodistance";New object("longitude1";$1;"latitude1";$2;"longitude2";$3;"latitude2";$4;"radius";$5)).value)
 	
 Else 
 	
@@ -357,6 +359,62 @@ Else
 					$str:=String:C10(Num:C11($o.value))
 					GET SYSTEM FORMAT:C994(Decimal separator:K60:1;$vDecSep)
 					$o.value:=Num:C11(Substring:C12($str;1;Position:C15($vDecSep;$str)-1))
+					  //______________________________________________________
+				: ($1="spherodistance")
+					  // Olivier Deschanels request and code
+					  //calculates the distance between two points on earth
+					  //(or any other sphere, if a fifth parameter is given to define the radius)
+					
+					  //the parameters are the geographical positions of the points
+					  //in DECIMAL DEGREES and the optional radius in any unit (result will depend on th
+					  //the default value is 6371 kilometers and the result in kilometers too
+					
+					  //calcule la distance, en km, entre deux points terrestres dont les coordonnées
+					  //XY sont données en paramètres, exprimés en degrés décimaux
+					  //ex : g_calculateDistance(14,5;45,33;-12,15;18)
+					
+					  //  cos(angle) = sin(latitude1)sin(latitude2)…
+					  //  …+cos(latitude1)cos(latitude2)cos(Longitude1-longitude2)
+					
+					  //SAMPLE : 
+					  //4D_CalculateDistance (-50,81;10,35;40,98;-80,53{;6371})
+					  // "latitude1";$1;"longitude1";$2;"latitude2";$3;"longitude2";$4;"radius";$5
+					
+					C_REAL:C285($Latitude1;$Longitude1;$Latitude2;$Longitude2;$DeltaLongitude;$Radius)
+					C_REAL:C285($Distance;$x;$Lat1;$Lat2;$Long1;$Long2)
+					
+					$Long1:=$2.longitude1
+					$Lat1:=$2.$latitude1
+					$Long2:=$2.longitude2
+					$Lat2:=$2.$latitude2
+					
+					$Longitude1:=$Long1*This:C1470.PI/180
+					$Latitude1:=$Lat1*This:C1470.PI/180
+					$Longitude2:=$Long2*This:C1470.PI/180
+					$Latitude2:=$Lat2*This:C1470.PI/180
+					
+					If ($2.radius#Null:C1517)
+						$Radius:=$2.radius
+					Else 
+						$Radius:=6371  //6371 = earth radius
+					End if 
+					
+					$DeltaLongitude:=This:C1470.abs($Longitude1-$Longitude2)
+					If ($DeltaLongitude>This:C1470.PI)
+						$DeltaLongitude:=(2*This:C1470.PI)-$DeltaLongitude
+					End if 
+					
+					$Cos_x:=(This:C1470.sin($Latitude1)*This:C1470.sin($Latitude2))+(This:C1470.cos($Latitude1)*This:C1470.cos($Latitude2)*This:C1470.cos($DeltaLongitude))  //-1 to 1
+					If ($Cos_x>0)
+						$x:=This:C1470.atan(((1-($Cos_x^2))^0.5)/$Cos_x)  //in radian
+					Else 
+						$x:=This:C1470.PI-This:C1470.abs(This:C1470.atan(((1-($Cos_x^2))^0.5)/$Cos_x))  //in radian
+					End if 
+					
+					$Distance:=$Radius*$x
+					$o.value:=This:C1470.abs($distance)
+					
+					
 				Else 
 					$o.success:=False:C215
 			End case 
