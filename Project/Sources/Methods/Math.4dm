@@ -21,7 +21,7 @@ C_OBJECT:C1216($0;$o)
 C_TEXT:C284($1;$text)
 C_OBJECT:C1216($2;$o)
 C_COLLECTION:C1488($col)
-C_REAL:C285($a;$b;$y)
+C_REAL:C285($a;$b;$c;$y;$dlat;$lon1;$lon2)
 C_LONGINT:C283($a_l;$b_l)
 C_VARIANT:C1683($value)
 
@@ -49,14 +49,19 @@ If (This:C1470[""]=Null:C1517)
 		"SQRT1_2";0.7071067811865;\
 		"Degree";0.01745329251994;\
 		"Radian";57.29577951308;\
+		"toRadians";Formula:C1597(Math ("toRadians";New object:C1471("num";$1)).value);\
+		"toDegrees";Formula:C1597(Math ("toDegrees";New object:C1471("num";$1)).value);\
 		"abs";Formula:C1597(Math ("abs";New object:C1471("num";$1)).value);\
 		"cos";Formula:C1597(Math ("cos";New object:C1471("num";$1)).value);\
 		"cosh";Formula:C1597(Math ("cosh";New object:C1471("num";$1)).value);\
+		"acos";Formula:C1597(Math ("acos";New object:C1471("num";$1)).value);\
 		"acosh";Formula:C1597(Math ("acosh";New object:C1471("num";$1)).value);\
 		"sin";Formula:C1597(Math ("sin";New object:C1471("num";$1)).value);\
+		"asin";Formula:C1597(Math ("asin";New object:C1471("num";$1)).value);\
 		"asinh";Formula:C1597(Math ("asinh";New object:C1471("num";$1)).value);\
 		"tan";Formula:C1597(Math ("tan";New object:C1471("num";$1)).value);\
 		"atan";Formula:C1597(Math ("atan";New object:C1471("num";$1)).value);\
+		"atan2";Formula:C1597(Math ("atan2";New object:C1471("y";$1;"x";$2)).value);\
 		"atanh";Formula:C1597(Math ("atanh";New object:C1471("num";$1)).value);\
 		"floor";Formula:C1597(Math ("floor";New object:C1471("num";$1)).value);\
 		"ceil";Formula:C1597(Math ("ceil";New object:C1471("num";$1)).value);\
@@ -188,13 +193,41 @@ Else
 					  //$o.value:=57.29577951308
 					  //  //$o.value:=Radian
 					  //______________________________________________________
+				: ($1="toRadians")
+					$o.value:=$o.value*This:C1470.PI/180
+					  //______________________________________________________
+				: ($1="toDegrees")
+					$o.value:=$o.value*180/This:C1470.PI
+					  //______________________________________________________
 				: ($1="abs")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 					$o.value:=Abs:C99($o.value)
 					  //______________________________________________________
 				: ($1="cos")
-					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acos
+					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cos
 					$o.value:=Cos:C18(Num:C11($o.value))
+					  //______________________________________________________
+				: ($1="acos")
+					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cos
+					C_REAL:C285($x)
+					$x:=Num:C11($o.value)
+					If (This:C1470.abs($x)>1)
+						$o.success:=False:C215
+						$o.value:=0
+					Else 
+						Case of 
+							: ($x=0)  // évitons une division par zéro
+								$o.value:=This:C1470.PI/2
+							: ($x<0)
+								If (This:C1470.PI>4)  // Correction d'un bug 4D sur la valeur de Pi dans certaines conditions.
+									$o.value:=This:C1470.PI-This:C1470.atan(This:C1470.sqrt(1-This:C1470.pow($x;2))/This:C1470.abs($x))
+								Else 
+									$o.value:=This:C1470.PI-This:C1470.atan(This:C1470.sqrt(1-This:C1470.pow($x;2))/This:C1470.abs($x))
+								End if 
+							: ($x>0)
+								$o.value:=This:C1470.atan(This:C1470.sqrt(1-This:C1470.pow($x;2))/$x)
+						End case 
+					End if 
 					  //______________________________________________________
 				: ($1="cosh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acos
@@ -203,6 +236,23 @@ Else
 				: ($1="sin")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sin
 					$o.value:=Sin:C17((Num:C11($o.value)))
+					  //______________________________________________________
+				: ($1="asin")
+					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asin
+					C_REAL:C285($x)
+					$x:=Num:C11($o.value)
+					If (This:C1470.abs($x)>1)
+						$o.success:=False:C215
+						$o.value:=0
+					Else 
+						If ($x=1)
+							$o.value:=This:C1470.PI/2
+						Else 
+							$o.value:=This:C1470.atan($x/(This:C1470.sqrt(1-This:C1470.pow($x;2))))  // result in radian
+						End if 
+					End if 
+					
+					  //$o.value:=This.atan2($x;This.sqrt((1+$x)*(1-$x)))
 					  //______________________________________________________
 				: ($1="asinh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asinh
@@ -215,6 +265,29 @@ Else
 				: ($1="atan")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan
 					$o.value:=Arctan:C20(Num:C11($o.value))
+					  //______________________________________________________
+				: ($1="atan2")
+					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
+					$y:=$2.y
+					$x:=$2.x
+					
+					Case of 
+						: ($x>0)
+							$o.value:=This:C1470.atan($y/$x)
+						: ($x<0) & ($y>=0)
+							$o.value:=This:C1470.atan($y/$x)+This:C1470.PI
+						: ($x<0) & ($y<0)
+							$o.value:=This:C1470.atan($y/$x)-This:C1470.PI
+						: ($x=0) & ($y>0)
+							$o.value:=(This:C1470.PI/2)
+						: ($x=0) & ($y<0)
+							$o.value:=-(This:C1470.PI/2)
+						: ($x=0) & ($y=0)
+							$o.value:=0
+						Else 
+							$o.succes:=False:C215
+					End case 
+					
 					  //______________________________________________________
 				: ($1="atanh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atanh
@@ -380,43 +453,100 @@ Else
 					  //4D_CalculateDistance (-50,81;10,35;40,98;-80,53{;6371})
 					  // "latitude1";$1;"longitude1";$2;"latitude2";$3;"longitude2";$4;"radius";$5
 					
-					C_REAL:C285($Latitude1;$Longitude1;$Latitude2;$Longitude2;$DeltaLongitude;$Radius)
+					C_REAL:C285($lat1rad;$Lon1rad;$lat2rad;$lon2rad;$dlon;$Radius)
 					C_REAL:C285($Distance;$x;$Lat1;$Lat2;$Long1;$Long2)
 					
-					$Long1:=$2.longitude1
-					$Lat1:=$2.$latitude1
-					$Long2:=$2.longitude2
-					$Lat2:=$2.$latitude2
+					$lon1:=$2.longitude1
+					$lat1:=$2.latitude1
+					$lon2:=$2.longitude2
+					$lat2:=$2.latitude2
 					
-					$Longitude1:=$Long1*This:C1470.PI/180
-					$Latitude1:=$Lat1*This:C1470.PI/180
-					$Longitude2:=$Long2*This:C1470.PI/180
-					$Latitude2:=$Lat2*This:C1470.PI/180
+					  // Method 1
 					
+					  //$Lon1rad:=This.toRadians($lon1)
+					  //$lat1rad:=This.toRadians($lat1)
+					  //$lon2rad:=This.toRadians($lon2)
+					  //$lat2rad:=This.toRadians($lat2)
+					
+					  //If ($2.radius#Null)
+					  //$Radius:=$2.radius
+					  //Else 
+					  //$Radius:=6371  //6371 = earth radius
+					  //End if 
+					  //$dlon:=This.abs($Lon1rad-$lon2rad)
+					  //If ($dlon>This.PI)
+					  //$dlon:=(2*This.PI)-$dlon
+					  //End if 
+					  //$Cos_x:=(This.sin($lat1rad)*This.sin($lat2rad))+(This.cos($lat1rad)*This.cos($lat2rad)*This.cos($dlon))  //-1 to 1
+					  //If ($Cos_x>0)
+					  //$x:=This.atan(((1-($Cos_x^2))^0.5)/$Cos_x)  //in radian
+					  //Else 
+					  //$x:=This.PI-This.abs(This.atan(((1-($Cos_x^2))^0.5)/$Cos_x))  //in radian
+					  //End if 
+					  //$Distance:=$Radius*$x
+					  //$o.value:=This.abs($distance)
+					
+					  // Method 2
+					  // distance between latitudes and longitudes 
+					  //$dlat:=This.toRadians($lat2-$lat1)
+					  //$dLon:=This.toRadians($lon2-$lon1)
+					  //  // convert to radians 
+					  //$lat1rad:=This.toRadians($lat1)
+					  //$lat2rad:=This.toRadians($lat2)
+					  //  // apply formulae 
+					  //$a:=This.pow(This.sin($dlat/2);2)+((This.pow(This.sin($dLon/2);2)*This.cos($lat1rad)*This.cos($lat2rad)))
+					  //If ($2.radius#Null)
+					  //$Radius:=$2.radius
+					  //Else 
+					  //$Radius:=6371  //6371 = earth radius
+					  //End if 
+					  //$c:=2*This.asin(This.sqrt($a))
+					  //$o.value:=$Radius*$c
+					
+					  // Method 3 - Harvesine Formula
 					If ($2.radius#Null:C1517)
 						$Radius:=$2.radius
 					Else 
 						$Radius:=6371  //6371 = earth radius
 					End if 
+					$lat1rad:=This:C1470.toRadians($lat1)
+					$lat2rad:=This:C1470.toRadians($lat2)
+					$dlat:=This:C1470.toRadians($lat2-$lat1)
+					$dlon:=This:C1470.toRadians($lon2-$lon1)
+					$a:=(This:C1470.pow(This:C1470.sin($dlat/2);2))+(This:C1470.cos($lat1rad)*This:C1470.cos($lat2rad)*This:C1470.pow(This:C1470.sin($dlon/2);2))
+					$c:=2*This:C1470.atan2(This:C1470.sqrt($a);This:C1470.sqrt(1-$a))
+					$o.value:=$Radius*$c
 					
-					$DeltaLongitude:=This:C1470.abs($Longitude1-$Longitude2)
-					If ($DeltaLongitude>This:C1470.PI)
-						$DeltaLongitude:=(2*This:C1470.PI)-$DeltaLongitude
-					End if 
+					  // Method 4
+					  //$lat1rad:=This.toRadians($lat1)
+					  //$lat2rad:=This.toRadians($lat2)
+					  //$dlon:=This.toRadians($lon2-$lon1)
+					  //If ($2.radius#Null)
+					  //$Radius:=$2.radius
+					  //Else 
+					  //$Radius:=6371  //6371 = earth radius
+					  //End if 
+					  //$o.value:=This.acos((This.sin($lat1rad)*This.sin($lat2rad))+(This.cos($lat1rad)*This.cos($lat2rad)*This.cos($dlon)))*$Radius
 					
-					$Cos_x:=(This:C1470.sin($Latitude1)*This:C1470.sin($Latitude2))+(This:C1470.cos($Latitude1)*This:C1470.cos($Latitude2)*This:C1470.cos($DeltaLongitude))  //-1 to 1
-					If ($Cos_x>0)
-						$x:=This:C1470.atan(((1-($Cos_x^2))^0.5)/$Cos_x)  //in radian
-					Else 
-						$x:=This:C1470.PI-This:C1470.abs(This:C1470.atan(((1-($Cos_x^2))^0.5)/$Cos_x))  //in radian
-					End if 
+					  // method 5
+					  // Haversine formula
+					  //https://stackoverflow.com/questions/18883601/function-to-calculate-distance-between-two-coordinates
+					  // https://www.htmlgoodies.com/beyond/javascript/calculate-the-distance-between-two-points-in-your-web-apps.html
+					  //$lat1rad:=This.toRadians($lat1)
+					  //$lat2rad:=This.toRadians($lat2)
+					  //$theta:=$lon1-$lon2
+					  //$radtheta:=This.toRadians($theta)
+					  //$distance:=(This.sin($lat1rad)*This.sin($lat2rad))+(This.cos($lat1rad)*This.cos($lat2rad)*This.cos($radtheta))
+					  //$distance:=This.acos($distance)
+					  //$distance:=this.toDegrees($distance)
+					  //$distance:=$distance*60*1.1515
+					  //$o.value:=$distance*1.609344 // km
 					
-					$Distance:=$Radius*$x
-					$o.value:=This:C1470.abs($distance)
 					
 					
 				Else 
 					$o.success:=False:C215
+					$o.success:=0
 			End case 
 	End case 
 End if 

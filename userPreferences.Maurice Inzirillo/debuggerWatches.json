@@ -1,6 +1,11 @@
 ﻿[
 	{
 		"type": 66,
+		"formula": "$test",
+		"expanded": true
+	},
+	{
+		"type": 66,
 		"formula": "$o.value"
 	},
 	{

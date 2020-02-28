@@ -1,16 +1,19 @@
 ﻿{
 	"Sources/Methods/Math.4dm": {
-		"startSelection": 31,
-		"endSelection": 31,
-		"firstSelectedLine": 369,
-		"lastSelectedLine": 369,
+		"startSelection": 11,
+		"endSelection": 0,
+		"firstSelectedLine": 210,
+		"lastSelectedLine": 210,
 		"folding": [
-			117,
-			249,
-			263
+			122,
+			322,
+			336,
+			340,
+			344,
+			348
 		],
 		"bookmarks": [],
-		"stamp": "2020-02-26T11:22:52.686Z"
+		"stamp": "2020-02-28T10:47:46.711Z"
 	},
 	"Sources/Methods/Launch_UT.4dm": {
 		"startSelection": 3,
@@ -427,19 +430,19 @@
 		"stamp": "2020-02-20T08:35:18.287Z"
 	},
 	"Sources/Methods/AJ_Math_info.4dm": {
-		"startSelection": 16,
-		"endSelection": 16,
+		"startSelection": 18,
+		"endSelection": 18,
 		"firstSelectedLine": 11,
 		"lastSelectedLine": 11,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2020-02-26T11:23:29.445Z"
+		"stamp": "2020-02-28T09:54:34.196Z"
 	},
 	"Sources/Methods/AJ_Math_BuildComponent.4dm": {
-		"startSelection": 7,
-		"endSelection": 7,
-		"firstSelectedLine": 13,
-		"lastSelectedLine": 13,
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 6,
+		"lastSelectedLine": 6,
 		"folding": [],
 		"bookmarks": [],
 		"stamp": "2020-02-20T13:36:59.253Z"
@@ -447,10 +450,10 @@
 	"Sources/Methods/test.4dm": {
 		"startSelection": 14,
 		"endSelection": 0,
-		"firstSelectedLine": 32,
-		"lastSelectedLine": 20,
+		"firstSelectedLine": 72,
+		"lastSelectedLine": 67,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2020-02-26T11:20:52.997Z"
+		"stamp": "2020-02-28T10:43:30.216Z"
 	}
 }

@@ -1,6 +1,13 @@
 ﻿[
 	{
-		"line": 25,
+		"line": 30,
+		"method": {
+			"type": 1,
+			"methodName": "test"
+		}
+	},
+	{
+		"line": 79,
 		"method": {
 			"type": 1,
 			"methodName": "test"
