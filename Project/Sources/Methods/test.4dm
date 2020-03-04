@@ -24,6 +24,7 @@ New York(40.6892° N, 74.0445° W)is 5574.8 km. This is not the exact measuremen
 formula assumes that the Earth is a perfect sphere when in fact it is an oblate spheroid.
 */
 
+
 $result:=$math.roundDecimal(1.222;0.1;"ROUND_UP")
 
 $test:=New AJ_Tools_UT_describe ("acos";Current method name:C684;"Test Math formula")
