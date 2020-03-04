@@ -86,7 +86,8 @@ If (This:C1470[""]=Null:C1517)
 		"sqrt";Formula:C1597(Math ("sqrt";New object:C1471("num";$1)).value);\
 		"tanh";Formula:C1597(Math ("tanh";New object:C1471("num";$1)).value);\
 		"trunc";Formula:C1597(Math ("trunc";New object:C1471("num";$1)).value);\
-		"spherodistance";Formula:C1597(Math ("spherodistance";$1).value)\
+		"spherodistance";Formula:C1597(Math ("spherodistance";$1).value);\
+		"roundDecimal";Formula:C1597(Math ("roundDecimal";New object:C1471("num";$1;"precision";$2;"roundType";$3)).value)\
 		)
 	
 	  //"spherodistance";Formula(Math ("spherodistance";New object("longitude1";$1;"latitude1";$2;"longitude2";$3;"latitude2";$4;"radius";$5)).value)
@@ -542,8 +543,175 @@ Else
 					  //$distance:=$distance*60*1.1515
 					  //$o.value:=$distance*1.609344 // km
 					
+				: ($1="roundDecimal")
+					  // AJ_Tools_RoundDecimal ( $valueToRound ; $precision ; $roundType ) -> return $valueRounded
+					  //
+					  // $valueToRound : (real) value to be rounded
+					  // $precision : (real) precision of the rounding
+					  // $roundType : (text) type of rounding
+					  // $valueRounded : (real) (return) value rounded
+					  //
+					  // Return a rounded value based on the given options
 					
+					If (False:C215)
+						  // ----------------------------------------------------
+						  // User name (OS): gabriel inzirillo
+						  // Date and time: 23.01.19, 11:26:55
+						  // ----------------------------------------------------
+						  // Method: AJ_Tools_RoundDecimal
+						  // Description
+						  // This method can be used to round a value.
+						  // $precision : The precision of the value that we want to round. Ex. 0.1, 0.5, 2, 0.01
+						  // $roundType : The list of existing round type must use one of those constants:
+						  //   ROUND_UP : Round UP away from 0 (<-0->)
+						  //   ROUND_DOWN : Round DOWN toward 0 (->0<-)
+						  //   ROUND_CEILING : Round UP (<-0<-)
+						  //   ROUND_FLOOR : Round DOWN (->0->)
+						  //   ROUND_HALF_UP : Round UP toward the nearest neighbor, round UP (<-0->) if equal distances to neighbors
+						  //   ROUND_HALF_DOWN : Round DOWN toward the nearest neighbor, round DOWN (->0<-) if equal distances to neighbors
+						  //   ROUND_HALF_CEILING : Round UP toward the nearest neighbor, round CEILING (<-0<-) if equal distances to neighbors
+						  //   ROUND_HALF_FLOOR : Round DOWN toward the nearest neighbor, round FLOOR (->0->) if equal distances to neighbors
+						  //   ROUND_HALF_EVEN : Round to the nearest neighbor, round to the EVEN neighbor if equal distances to neighbors
+						  //
+						  // Examples : 
+						  //   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_UP") -> 1.3
+						  //   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_UP") -> -1.3
+						  // 
+						  //   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_DOWN") -> 1.2
+						  //   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_DOWN") -> -1.2
+						  // 
+						  //   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_CEILING") -> 1.3
+						  //   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_CEILING") -> -1.2
+						  // 
+						  //   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_FLOOR") -> 1.2
+						  //   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_FLOOR") -> -1.3
+						  // 
+						  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_UP") -> 1.3
+						  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_UP") -> -1.3
+						  // 
+						  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_DOWN") -> 1.2
+						  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_DOWN") -> -1.2
+						  // 
+						  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_CEILING") -> 1.3
+						  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_CEILING") -> -1.2
+						  // 
+						  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_FLOOR") -> 1.2
+						  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_FLOOR") -> -1.3
+						  // 
+						  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_EVEN") -> 1.2
+						  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_EVEN") -> -1.2
+						  // 
+						  //   AJ_Tools_RoundDecimal(1.15;0.1;"ROUND_HALF_EVEN") -> 1.2
+						  //   AJ_Tools_RoundDecimal(-1.15;0.1;"ROUND_HALF_EVEN") -> -1.2
+						  // 
+						  // ----------------------------------------------------
+						  // Copyrights (C) AJAR SA - 2019
+					End if 
 					
+					C_REAL:C285($valueToRound)
+					C_REAL:C285($precision)
+					C_TEXT:C284($roundType)
+					C_REAL:C285($valueRounded)
+					C_REAL:C285($roundedDif;$multiple)
+					
+					If ($2.num=Null:C1517) | ($2.precision=Null:C1517) | ($2.roundType=Null:C1517)
+						ASSERT:C1129(False:C215;"You must give the 3 mandatory parameters to do the rounding.")
+					Else 
+						$valueToRound:=$2.num
+						$precision:=$2.precision
+						$roundType:=$2.roundType
+						
+						If ($precision#0)
+							  // $multiple is the multiple that will help to do the rounding using the 4D Round command
+							  // We will use it to divide the initial value to then do a rounding to 1 and then multiple again the result to come back on our feet.
+							  // Ex. (1.222;0.1;AJ_ROUND_DOWN) -> $multiple = 1/0.1 = 10 -> Round(1.222*10;0)/10 = Round(12.22)/10 = 12/10 = 1.2
+							$multiple:=1/$precision
+						End if 
+						
+						$valueRounded:=Round:C94($valueToRound*$multiple;0)/$multiple
+						$roundedDif:=Abs:C99(($valueRounded-$valueToRound)*$multiple)  // Difference between the rounded value and the notRounded value to see if it is in the half (=0.5)
+						
+						  // Cast the good rounding type
+						  // Can depend of the sign of the number (positive or negative)
+						  // Can depend on the rounded difference for the ROUND_HALF_@ cases
+						  // ROUND_UP (<-0->) 
+						  // ROUND_DOWN (->0<-)
+						Case of 
+							: ($roundType="ROUND_UP") & ($valueToRound>0)
+								  // ROUND_CEILING for positive numbers
+								$roundType:="ROUND_CEILING"
+							: ($roundType="ROUND_UP") & ($valueToRound<0)
+								  // ROUND_FLOOR for negative numbers
+								$roundType:="ROUND_FLOOR"
+								
+							: ($roundType="ROUND_DOWN") & ($valueToRound>0)
+								  // ROUND_FLOOR for positive numbers
+								$roundType:="ROUND_FLOOR"
+							: ($roundType="ROUND_DOWN") & ($valueToRound<0)
+								  // ROUND_CEILING for negative numbers
+								$roundType:="ROUND_CEILING"
+								
+							: ($roundType="ROUND_HALF_DOWN") & ($roundedDif=0.5) & ($valueToRound>0)
+								  // ROUND_HALF_DOWN when rounded difference is 0.5 and value is positive is a ROUND_FLOOR
+								$roundType:="ROUND_FLOOR"
+								
+							: ($roundType="ROUND_HALF_DOWN") & ($roundedDif=0.5) & ($valueToRound<0)
+								  // ROUND_HALF_DOWN when rounded difference is 0.5 and value is negative is a ROUND_CEILING
+								$roundType:="ROUND_CEILING"
+								
+							: ($roundType="ROUND_HALF_CEILING") & ($roundedDif=0.5)
+								  // ROUND_HALF_CEILING when rounded difference is 0.5 is a ROUND_CEILING
+								$roundType:="ROUND_CEILING"
+								
+							: ($roundType="ROUND_HALF_FLOOR") & ($roundedDif=0.5)
+								  // ROUND_HALF_FLOOR when rounded difference is 0.5 is a ROUND_FLOOR
+								$roundType:="ROUND_FLOOR"
+								
+							: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=0) & ($valueToRound>0)
+								  // ROUND_HALF_EVEN when nearest neighbor is even and value is positive is a ROUND_FLOOR
+								$roundType:="ROUND_FLOOR"
+							: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=0) & ($valueToRound<0)
+								  // ROUND_HALF_EVEN when nearest neighbor is even and value is negative is a ROUND_CEILING
+								$roundType:="ROUND_CEILING"
+							: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=1) & ($valueToRound>0)
+								  // ROUND_HALF_EVEN when nearest neighbor is odd and value is positive is a ROUND_CEILING
+								$roundType:="ROUND_CEILING"
+							: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=1) & ($valueToRound<0)
+								  // ROUND_HALF_EVEN when nearest neighbor is odd and value is negative is a ROUND_FLOOR
+								$roundType:="ROUND_FLOOR"
+						End case 
+						
+						Case of 
+							: ($roundType="ROUND_CEILING")
+								If ($valueRounded<$valueToRound)
+									$valueRounded:=$valueRounded+$precision
+								End if 
+								
+							: ($roundType="ROUND_FLOOR")
+								If ($valueRounded>$valueToRound)
+									$valueRounded:=$valueRounded-$precision
+								End if 
+								
+							: ($roundType="ROUND_HALF_UP")
+								  // Default 4D rounding is ROUND_HALF_UP
+								  // Don't need to do anything
+							: ($roundType="ROUND_HALF_DOWN")
+								  // Special case are trap on the first caseof
+							: ($roundType="ROUND_HALF_CEILING")
+								  // Special case are trap on the first caseof
+							: ($roundType="ROUND_HALF_FLOOR")
+								  // Special case are trap on the first caseof
+							: ($roundType="ROUND_HALF_UP")
+								  // Special case are trap on the first caseof
+							: ($roundType="ROUND_HALF_EVEN")
+								  // Special case are trap on the first caseof
+							Else 
+								$valueRounded:=$valueToRound
+						End case 
+						
+					End if 
+					
+					$o.value:=$valueRounded
 				Else 
 					$o.success:=False:C215
 					$o.success:=0
