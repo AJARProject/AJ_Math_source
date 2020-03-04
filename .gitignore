@@ -19,7 +19,6 @@ data.match
 /Logs/*
 /Project/DerivedData/*
 /Project/BuildSettings/*
-/Settings/*
 /userPreferences*/*
 /Builds/*
 
@@ -33,8 +32,6 @@ data.match
 # dont need the 4d info component folder_reports
 Folder_Reports
 
-# include the following if you want to ignore the database settings
-*.4DSettings
 
 # OS generated files #
 ######################
