@@ -1,7 +1,7 @@
 ﻿{
 	"methods": {
 		"AJ_Math_info": {
-			"timeStamp": "2020-03-04T17:42:52.208Z",
+			"timeStamp": "2020-03-07T13:06:36.921Z",
 			"attributes": {
 				"lang": "en"
 			}
@@ -10,10 +10,10 @@
 			"timeStamp": "2020-03-04T15:49:51.225Z"
 		},
 		"test": {
-			"timeStamp": "2020-03-04T17:23:46.514Z"
+			"timeStamp": "2020-03-04T18:16:11.663Z"
 		},
 		"Math": {
-			"timeStamp": "2020-03-04T17:24:27.098Z",
+			"timeStamp": "2020-03-04T17:50:17.271Z",
 			"attributes": {
 				"shared": true
 			}
