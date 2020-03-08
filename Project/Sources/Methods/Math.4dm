@@ -436,16 +436,16 @@ Else
 					  //______________________________________________________
 				: ($1="spherodistance")
 					  // Olivier Deschanels request and code
-					  //calculates the distance between two points on earth
-					  //(or any other sphere, if a fifth parameter is given to define the radius)
+					  // calculates the distance between two points on earth
+					  // (or any other sphere, if a fifth parameter is given to define the radius)
 					
-					  //the parameters are the geographical positions of the points
-					  //in DECIMAL DEGREES and the optional radius in any unit (result will depend on th
-					  //the default value is 6371 kilometers and the result in kilometers too
+					  // the parameters are the geographical positions of the points
+					  // in DECIMAL DEGREES and the optional radius in any unit (result will depend on th
+					  // the default value is 6371 kilometers and the result in kilometers too
 					
-					  //calcule la distance, en km, entre deux points terrestres dont les coordonnées
-					  //XY sont données en paramètres, exprimés en degrés décimaux
-					  //ex : g_calculateDistance(14,5;45,33;-12,15;18)
+					  // calcule la distance, en km, entre deux points terrestres dont les coordonnées
+					  // XY sont données en paramètres, exprimés en degrés décimaux
+					  // ex : g_calculateDistance(14,5;45,33;-12,15;18)
 					
 					  //  cos(angle) = sin(latitude1)sin(latitude2)…
 					  //  …+cos(latitude1)cos(latitude2)cos(Longitude1-longitude2)
