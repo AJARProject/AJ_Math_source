@@ -1,4 +1,4 @@
-//%attributes = {"shared":true}
+//%attributes = {"shared":true,"preemptive":"capable"}
 
   // LongInt2BinaryString ( longint ) -> return
   //
