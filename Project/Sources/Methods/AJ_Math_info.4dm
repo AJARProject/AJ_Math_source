@@ -10,6 +10,6 @@
 
 C_TEXT:C284($0)
 
-$version_t:="1.2.3-Build23"  // Wed, 11 Mar 2020 15:36:13 GMT
+$version_t:="1.2.3-Build25"  // Thu, 07 May 2020 14:32:36 GMT
 
 $0:="AJ_Math (v18) : "+$version_t

@@ -1,0 +1,8 @@
+Class constructor
+	This:C1470.E:=2.718281828459
+	This:C1470.LN2:=0.6931471805599
+	This:C1470.PI:=3.14159265359
+	
+Function toRadians
+	C_REAL:C285($1;$0)
+	$0:=$1*This:C1470.PI/180
