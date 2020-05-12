@@ -1,4 +1,4 @@
-//%attributes = {"shared":true,"preemptive":"capable"}
+//%attributes = {"invisible":true,"shared":true,"preemptive":"capable"}
 
   // Math ( ) -> Class
   //
