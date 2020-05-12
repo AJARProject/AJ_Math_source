@@ -752,7 +752,6 @@ Function spherodistance
 	
 	  //SAMPLE : 
 	  //4D_CalculateDistance (-50,81;10,35;40,98;-80,53{;6371})
-	  // "latitude1";$1;"longitude1";$2;"latitude2";$3;"longitude2";$4;"radius";$5
 	
 	C_REAL:C285($1;$2;$3;$4;$5;$0)
 	C_REAL:C285($lat1rad;$Lon1rad;$lat2rad;$lon2rad;$dlon;$Radius;$result)
