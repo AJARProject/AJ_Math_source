@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"invisible":true}
   // AJ_Math_BuildComponent (  )
   //
   //
