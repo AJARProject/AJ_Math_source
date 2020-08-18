@@ -16,9 +16,9 @@ Class constructor
 	
 	
 Function abs
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
-	C_REAL:C285($0)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
+	var $0 : Real
+	var $1 : Real
 	
 	If (Count parameters:C259=1)
 		$0:=Abs:C99($1)
@@ -28,9 +28,10 @@ Function abs
 	
 	
 Function acos
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acos
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acos
+	
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -44,8 +45,8 @@ Function acos
 					$result:=This:C1470.PI/2
 					
 				: ($value<0)
-					  // Question? Le code dans le if et le else est le meme? je ne comprend pas ce test
-					  // Et PI est toujours <4... ???
+					// Question? Le code dans le if et le else est le meme? je ne comprend pas ce test
+					// Et PI est toujours <4... ???
 					If (This:C1470.PI>4)  // Correction d'un bug 4D sur la valeur de Pi dans certaines conditions.
 						$result:=This:C1470.PI-This:C1470.atan(This:C1470.sqrt(1-This:C1470.pow($value;2))/This:C1470.abs($value))
 					Else 
@@ -66,9 +67,10 @@ Function acos
 	
 	
 Function acosh
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acosh
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acosh
+	
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -81,9 +83,9 @@ Function acosh
 	
 	
 Function asin
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asin
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asin
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -104,9 +106,9 @@ Function asin
 	
 	
 Function asinh
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asinh
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asinh
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -119,9 +121,9 @@ Function asinh
 	
 	
 Function atan
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$result:=Arctan:C20($1)
@@ -133,10 +135,11 @@ Function atan
 	
 	
 Function atan2
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$y)
-	C_REAL:C285($2;$x)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
+	
+	var $0;$result : Real
+	var $1;$y : Real
+	var $2;$x : Real
 	$y:=$1
 	$x:=$2
 	
@@ -156,7 +159,7 @@ Function atan2
 			: ($x=0) & ($y=0)
 				$result:=0
 			Else 
-				$o.succes:=False:C215
+				$result:=This:C1470.NaN
 		End case 
 		
 	Else 
@@ -167,9 +170,9 @@ Function atan2
 	
 	
 Function atanh
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atanh
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atanh
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -182,9 +185,9 @@ Function atanh
 	
 	
 Function cbrt
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cbrt
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cbrt
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -203,12 +206,13 @@ Function cbrt
 	
 	
 Function ceil
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=-Int:C8(-$1)
+		$value:=$1
+		$result:=-Int:C8(-$value)
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -217,12 +221,13 @@ Function ceil
 	
 	
 Function clz32
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/clz32
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/clz32
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=Position:C15("1";LongInt2BinaryString ($1);1)-1
+		$value:=$1
+		$result:=Position:C15("1";LongInt2BinaryString($value);1)-1
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -231,12 +236,13 @@ Function clz32
 	
 	
 Function cos
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cos
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cos
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=Cos:C18($1)
+		$value:=$1
+		$result:=Cos:C18($value)
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -245,9 +251,9 @@ Function cos
 	
 	
 Function cosh
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cosh
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cosh
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -260,12 +266,13 @@ Function cosh
 	
 	
 Function exp
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/exp
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/exp
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=Exp:C21($1)
+		$value:=$1
+		$result:=Exp:C21($value)
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -274,12 +281,13 @@ Function exp
 	
 	
 Function expm1
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/expm1
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/expm1
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=Exp:C21($1)-1
+		$value:=$1
+		$result:=Exp:C21($value)-1
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -288,12 +296,13 @@ Function expm1
 	
 	
 Function floor
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=Int:C8($1)
+		$value:=$1
+		$result:=Int:C8($value)
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -302,9 +311,11 @@ Function floor
 	
 	
 Function hypot
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot
-	C_REAL:C285($0;$result)
-	C_REAL:C285(${1})
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot
+	//C_REAL($0;$result)
+	//C_REAL(${1})
+	var $0;$result : Real
+	var ${1} : Real  // not sure if 4D is able to handle this kind of declaration... to test
 	
 	If (Count parameters:C259>0)
 		$sum:=0
@@ -320,9 +331,9 @@ Function hypot
 	
 	
 Function imul
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul
-	C_REAL:C285($0;$result)
-	C_LONGINT:C283($1;$2)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul
+	var $0;$result : Real
+	var $1;$2 : Integer
 	
 	If (Count parameters:C259=1)
 		$result:=$1*$2
@@ -334,26 +345,27 @@ Function imul
 	
 	
 Function log
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
 	
+	var $0;$result : Real
+	var $1;$value : Real
 	If (Count parameters:C259=1)
-		$result:=Log:C22($1)
+		$value:=$1
+		$result:=Log:C22($value)
 	Else 
 		$result:=This:C1470.NaN
 	End if 
 	
 	$0:=$result
 	
-	
 Function log10
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=Log:C22($1)*This:C1470.LOG10E
+		$value:=$1
+		$result:=Log:C22($value)*This:C1470.LOG10E
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -362,12 +374,13 @@ Function log10
 	
 	
 Function log1p
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log1p
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log1p
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=This:C1470.log(1+$1)
+		$value:=$1
+		$result:=This:C1470.log(1+$value)
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -376,12 +389,13 @@ Function log1p
 	
 	
 Function log2
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$0:=Log:C22($1)*This:C1470.LOG2E
+		$value:=$1
+		$0:=Log:C22($value)*This:C1470.LOG2E
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -390,23 +404,22 @@ Function log2
 	
 	
 Function max
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
-	C_REAL:C285($0)
-	C_COLLECTION:C1488($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
+	var $0 : Real
+	var $1 : Collection
 	$0:=$1.max()
 	
-	
 Function min
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min
-	C_REAL:C285($0)
-	C_COLLECTION:C1488($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min
+	var $0 : Real
+	var $1 : Collection
 	$0:=$1.min()
 	
 	
 Function pow
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$2)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
+	var $0;$result : Real
+	var $1;$2 : Real
 	
 	If (Count parameters:C259=2)
 		$result:=$1^$2
@@ -418,15 +431,15 @@ Function pow
 	
 	
 Function random
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-	C_REAL:C285($0)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+	var $0 : Integer
 	$0:=Random:C100/MAXINT:K35:1
 	
 	
 Function round
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -444,9 +457,9 @@ Function round
 	
 	
 Function sign
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -468,12 +481,13 @@ Function sign
 	
 	
 Function sin
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sin
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sin
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=Sin:C17(($1))
+		$value:=$1
+		$result:=Sin:C17(($value))
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -482,12 +496,13 @@ Function sin
 	
 	
 Function sinh
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sinh
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sinh
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$y:=This:C1470.exp($1)
+		$value:=$1
+		$y:=This:C1470.exp($value)
 		$result:=($y-(1/$y))/2
 	Else 
 		$result:=This:C1470.NaN
@@ -497,12 +512,13 @@ Function sinh
 	
 	
 Function sqrt
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=Square root:C539($1)
+		$value:=$1
+		$result:=Square root:C539($value)
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -511,12 +527,13 @@ Function sqrt
 	
 	
 Function tan
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tan
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tan
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$result:=Tan:C19($1)
+		$value:=$1
+		$result:=Tan:C19($value)
 	Else 
 		$result:=This:C1470.NaN
 	End if 
@@ -525,9 +542,9 @@ Function tan
 	
 	
 Function tanh
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tanh
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1;$value)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tanh
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
 		$value:=$1
@@ -541,20 +558,31 @@ Function tanh
 	$0:=$result
 	
 Function toRadians
-	C_REAL:C285($1;$0)
-	$0:=$1*This:C1470.PI/180
+	var $0 : Real
+	var $1 : Real
+	If (Count parameters:C259=1)
+		$0:=$1*This:C1470.PI/180
+	Else 
+		$result:=0
+	End if 
 	
 Function toDegrees
-	C_REAL:C285($1;$0)
-	$0:=$1*180/This:C1470.PI
+	var $0 : Real
+	var $1 : Real
+	If (Count parameters:C259=1)
+		$0:=$1*180/This:C1470.PI
+	Else 
+		$result:=0
+	End if 
 	
 Function trunc
-	  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
-	C_REAL:C285($0;$result)
-	C_REAL:C285($1)
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
+	var $0;$result : Real
+	var $1;$value : Real
 	
 	If (Count parameters:C259=1)
-		$str:=String:C10($1)
+		$value:=$1
+		$str:=String:C10($value)
 		GET SYSTEM FORMAT:C994(Decimal separator:K60:1;$vDecSep)
 		$result:=Num:C11(Substring:C12($str;1;Position:C15($vDecSep;$str)-1))
 	Else 
@@ -564,75 +592,75 @@ Function trunc
 	$0:=$result
 	
 Function roundDecimal
-	  // roundDecimal ( $valueToRound ; $precision ; $roundType ) -> return $valueRounded
-	  //
-	  // $valueToRound : (real) value to be rounded
-	  // $precision : (real) precision of the rounding
-	  // $roundType : (text) type of rounding
-	  // $valueRounded : (real) (return) value rounded
-	  //
-	  // Return a rounded value based on the given options
+	// roundDecimal ( $valueToRound ; $precision ; $roundType ) -> return $valueRounded
+	//
+	// $valueToRound : (real) value to be rounded
+	// $precision : (real) precision of the rounding
+	// $roundType : (text) type of rounding
+	// $valueRounded : (real) (return) value rounded
+	//
+	// Return a rounded value based on the given options
 	
 	If (False:C215)
-		  // ----------------------------------------------------
-		  // User name (OS): gabriel inzirillo
-		  // Date and time: 23.01.19, 11:26:55
-		  // ----------------------------------------------------
-		  // Method: AJ_Tools_RoundDecimal
-		  // Description
-		  // This method can be used to round a value.
-		  // $precision : The precision of the value that we want to round. Ex. 0.1, 0.5, 2, 0.01
-		  // $roundType : The list of existing round type must use one of those constants:
-		  //   ROUND_UP : Round UP away from 0 (<-0->)
-		  //   ROUND_DOWN : Round DOWN toward 0 (->0<-)
-		  //   ROUND_CEILING : Round UP (<-0<-)
-		  //   ROUND_FLOOR : Round DOWN (->0->)
-		  //   ROUND_HALF_UP : Round UP toward the nearest neighbor, round UP (<-0->) if equal distances to neighbors
-		  //   ROUND_HALF_DOWN : Round DOWN toward the nearest neighbor, round DOWN (->0<-) if equal distances to neighbors
-		  //   ROUND_HALF_CEILING : Round UP toward the nearest neighbor, round CEILING (<-0<-) if equal distances to neighbors
-		  //   ROUND_HALF_FLOOR : Round DOWN toward the nearest neighbor, round FLOOR (->0->) if equal distances to neighbors
-		  //   ROUND_HALF_EVEN : Round to the nearest neighbor, round to the EVEN neighbor if equal distances to neighbors
-		  //
-		  // Examples : 
-		  //   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_UP") -> 1.3
-		  //   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_UP") -> -1.3
-		  // 
-		  //   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_DOWN") -> 1.2
-		  //   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_DOWN") -> -1.2
-		  // 
-		  //   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_CEILING") -> 1.3
-		  //   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_CEILING") -> -1.2
-		  // 
-		  //   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_FLOOR") -> 1.2
-		  //   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_FLOOR") -> -1.3
-		  // 
-		  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_UP") -> 1.3
-		  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_UP") -> -1.3
-		  // 
-		  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_DOWN") -> 1.2
-		  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_DOWN") -> -1.2
-		  // 
-		  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_CEILING") -> 1.3
-		  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_CEILING") -> -1.2
-		  // 
-		  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_FLOOR") -> 1.2
-		  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_FLOOR") -> -1.3
-		  // 
-		  //   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_EVEN") -> 1.2
-		  //   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_EVEN") -> -1.2
-		  // 
-		  //   AJ_Tools_RoundDecimal(1.15;0.1;"ROUND_HALF_EVEN") -> 1.2
-		  //   AJ_Tools_RoundDecimal(-1.15;0.1;"ROUND_HALF_EVEN") -> -1.2
-		  // 
-		  // ----------------------------------------------------
-		  // Copyrights (C) AJAR SA - 2019
+		// ----------------------------------------------------
+		// User name (OS): gabriel inzirillo
+		// Date and time: 23.01.19, 11:26:55
+		// ----------------------------------------------------
+		// Method: AJ_Tools_RoundDecimal
+		// Description
+		// This method can be used to round a value.
+		// $precision : The precision of the value that we want to round. Ex. 0.1, 0.5, 2, 0.01
+		// $roundType : The list of existing round type must use one of those constants:
+		//   ROUND_UP : Round UP away from 0 (<-0->)
+		//   ROUND_DOWN : Round DOWN toward 0 (->0<-)
+		//   ROUND_CEILING : Round UP (<-0<-)
+		//   ROUND_FLOOR : Round DOWN (->0->)
+		//   ROUND_HALF_UP : Round UP toward the nearest neighbor, round UP (<-0->) if equal distances to neighbors
+		//   ROUND_HALF_DOWN : Round DOWN toward the nearest neighbor, round DOWN (->0<-) if equal distances to neighbors
+		//   ROUND_HALF_CEILING : Round UP toward the nearest neighbor, round CEILING (<-0<-) if equal distances to neighbors
+		//   ROUND_HALF_FLOOR : Round DOWN toward the nearest neighbor, round FLOOR (->0->) if equal distances to neighbors
+		//   ROUND_HALF_EVEN : Round to the nearest neighbor, round to the EVEN neighbor if equal distances to neighbors
+		//
+		// Examples : 
+		//   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_UP") -> 1.3
+		//   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_UP") -> -1.3
+		// 
+		//   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_DOWN") -> 1.2
+		//   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_DOWN") -> -1.2
+		// 
+		//   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_CEILING") -> 1.3
+		//   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_CEILING") -> -1.2
+		// 
+		//   AJ_Tools_RoundDecimal(1.222;0.1;"ROUND_FLOOR") -> 1.2
+		//   AJ_Tools_RoundDecimal(-1.222;0.1;"ROUND_FLOOR") -> -1.3
+		// 
+		//   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_UP") -> 1.3
+		//   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_UP") -> -1.3
+		// 
+		//   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_DOWN") -> 1.2
+		//   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_DOWN") -> -1.2
+		// 
+		//   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_CEILING") -> 1.3
+		//   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_CEILING") -> -1.2
+		// 
+		//   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_FLOOR") -> 1.2
+		//   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_FLOOR") -> -1.3
+		// 
+		//   AJ_Tools_RoundDecimal(1.25;0.1;"ROUND_HALF_EVEN") -> 1.2
+		//   AJ_Tools_RoundDecimal(-1.25;0.1;"ROUND_HALF_EVEN") -> -1.2
+		// 
+		//   AJ_Tools_RoundDecimal(1.15;0.1;"ROUND_HALF_EVEN") -> 1.2
+		//   AJ_Tools_RoundDecimal(-1.15;0.1;"ROUND_HALF_EVEN") -> -1.2
+		// 
+		// ----------------------------------------------------
+		// Copyrights (C) AJAR SA - 2019
 	End if 
 	
-	C_REAL:C285($1;$valueToRound)
-	C_REAL:C285($2;$precision)
-	C_TEXT:C284($3;$roundType)
-	C_REAL:C285($0;$valueRounded)
-	C_REAL:C285($roundedDif;$multiple)
+	var $1;$valueToRound : Real
+	var $2;$precision : Real
+	var $3;$roundType : Text
+	var $0;$valueRounded : Real
+	var $roundedDif;$multiple : Real
 	
 	If (Count parameters:C259#3)
 		$valueRounded:=This:C1470.NaN
@@ -642,62 +670,62 @@ Function roundDecimal
 		$roundType:=$3
 		
 		If ($precision#0)
-			  // $multiple is the multiple that will help to do the rounding using the 4D Round command
-			  // We will use it to divide the initial value to then do a rounding to 1 and then multiple again the result to come back on our feet.
-			  // Ex. (1.222;0.1;AJ_ROUND_DOWN) -> $multiple = 1/0.1 = 10 -> Round(1.222*10;0)/10 = Round(12.22)/10 = 12/10 = 1.2
+			// $multiple is the multiple that will help to do the rounding using the 4D Round command
+			// We will use it to divide the initial value to then do a rounding to 1 and then multiple again the result to come back on our feet.
+			// Ex. (1.222;0.1;AJ_ROUND_DOWN) -> $multiple = 1/0.1 = 10 -> Round(1.222*10;0)/10 = Round(12.22)/10 = 12/10 = 1.2
 			$multiple:=1/$precision
 		End if 
 		
 		$valueRounded:=Round:C94($valueToRound*$multiple;0)/$multiple
 		$roundedDif:=Abs:C99(($valueRounded-$valueToRound)*$multiple)  // Difference between the rounded value and the notRounded value to see if it is in the half (=0.5)
 		
-		  // Cast the good rounding type
-		  // Can depend of the sign of the number (positive or negative)
-		  // Can depend on the rounded difference for the ROUND_HALF_@ cases
-		  // ROUND_UP (<-0->) 
-		  // ROUND_DOWN (->0<-)
+		// Cast the good rounding type
+		// Can depend of the sign of the number (positive or negative)
+		// Can depend on the rounded difference for the ROUND_HALF_@ cases
+		// ROUND_UP (<-0->) 
+		// ROUND_DOWN (->0<-)
 		Case of 
 			: ($roundType="ROUND_UP") & ($valueToRound>0)
-				  // ROUND_CEILING for positive numbers
+				// ROUND_CEILING for positive numbers
 				$roundType:="ROUND_CEILING"
 			: ($roundType="ROUND_UP") & ($valueToRound<0)
-				  // ROUND_FLOOR for negative numbers
+				// ROUND_FLOOR for negative numbers
 				$roundType:="ROUND_FLOOR"
 				
 			: ($roundType="ROUND_DOWN") & ($valueToRound>0)
-				  // ROUND_FLOOR for positive numbers
+				// ROUND_FLOOR for positive numbers
 				$roundType:="ROUND_FLOOR"
 			: ($roundType="ROUND_DOWN") & ($valueToRound<0)
-				  // ROUND_CEILING for negative numbers
+				// ROUND_CEILING for negative numbers
 				$roundType:="ROUND_CEILING"
 				
 			: ($roundType="ROUND_HALF_DOWN") & ($roundedDif=0.5) & ($valueToRound>0)
-				  // ROUND_HALF_DOWN when rounded difference is 0.5 and value is positive is a ROUND_FLOOR
+				// ROUND_HALF_DOWN when rounded difference is 0.5 and value is positive is a ROUND_FLOOR
 				$roundType:="ROUND_FLOOR"
 				
 			: ($roundType="ROUND_HALF_DOWN") & ($roundedDif=0.5) & ($valueToRound<0)
-				  // ROUND_HALF_DOWN when rounded difference is 0.5 and value is negative is a ROUND_CEILING
+				// ROUND_HALF_DOWN when rounded difference is 0.5 and value is negative is a ROUND_CEILING
 				$roundType:="ROUND_CEILING"
 				
 			: ($roundType="ROUND_HALF_CEILING") & ($roundedDif=0.5)
-				  // ROUND_HALF_CEILING when rounded difference is 0.5 is a ROUND_CEILING
+				// ROUND_HALF_CEILING when rounded difference is 0.5 is a ROUND_CEILING
 				$roundType:="ROUND_CEILING"
 				
 			: ($roundType="ROUND_HALF_FLOOR") & ($roundedDif=0.5)
-				  // ROUND_HALF_FLOOR when rounded difference is 0.5 is a ROUND_FLOOR
+				// ROUND_HALF_FLOOR when rounded difference is 0.5 is a ROUND_FLOOR
 				$roundType:="ROUND_FLOOR"
 				
 			: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=0) & ($valueToRound>0)
-				  // ROUND_HALF_EVEN when nearest neighbor is even and value is positive is a ROUND_FLOOR
+				// ROUND_HALF_EVEN when nearest neighbor is even and value is positive is a ROUND_FLOOR
 				$roundType:="ROUND_FLOOR"
 			: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=0) & ($valueToRound<0)
-				  // ROUND_HALF_EVEN when nearest neighbor is even and value is negative is a ROUND_CEILING
+				// ROUND_HALF_EVEN when nearest neighbor is even and value is negative is a ROUND_CEILING
 				$roundType:="ROUND_CEILING"
 			: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=1) & ($valueToRound>0)
-				  // ROUND_HALF_EVEN when nearest neighbor is odd and value is positive is a ROUND_CEILING
+				// ROUND_HALF_EVEN when nearest neighbor is odd and value is positive is a ROUND_CEILING
 				$roundType:="ROUND_CEILING"
 			: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=1) & ($valueToRound<0)
-				  // ROUND_HALF_EVEN when nearest neighbor is odd and value is negative is a ROUND_FLOOR
+				// ROUND_HALF_EVEN when nearest neighbor is odd and value is negative is a ROUND_FLOOR
 				$roundType:="ROUND_FLOOR"
 		End case 
 		
@@ -713,18 +741,18 @@ Function roundDecimal
 				End if 
 				
 			: ($roundType="ROUND_HALF_UP")
-				  // Default 4D rounding is ROUND_HALF_UP
-				  // Don't need to do anything
+				// Default 4D rounding is ROUND_HALF_UP
+				// Don't need to do anything
 			: ($roundType="ROUND_HALF_DOWN")
-				  // Special case are trap on the first caseof
+				// Special case are trap on the first caseof
 			: ($roundType="ROUND_HALF_CEILING")
-				  // Special case are trap on the first caseof
+				// Special case are trap on the first caseof
 			: ($roundType="ROUND_HALF_FLOOR")
-				  // Special case are trap on the first caseof
+				// Special case are trap on the first caseof
 			: ($roundType="ROUND_HALF_UP")
-				  // Special case are trap on the first caseof
+				// Special case are trap on the first caseof
 			: ($roundType="ROUND_HALF_EVEN")
-				  // Special case are trap on the first caseof
+				// Special case are trap on the first caseof
 			Else 
 				$valueRounded:=$valueToRound
 		End case 
@@ -735,27 +763,27 @@ Function roundDecimal
 	
 	
 Function spherodistance
-	  // Olivier Deschanels request and code
-	  // calculates the distance between two points on earth
-	  // (or any other sphere, if a fifth parameter is given to define the radius)
+	// Olivier Deschanels request and code
+	// calculates the distance between two points on earth
+	// (or any other sphere, if a fifth parameter is given to define the radius)
 	
-	  // the parameters are the geographical positions of the points
-	  // in DECIMAL DEGREES and the optional radius in any unit (result will depend on th
-	  // the default value is 6371 kilometers and the result in kilometers too
+	// the parameters are the geographical positions of the points
+	// in DECIMAL DEGREES and the optional radius in any unit (result will depend on th
+	// the default value is 6371 kilometers and the result in kilometers too
 	
-	  // calcule la distance, en km, entre deux points terrestres dont les coordonnées
-	  // XY sont données en paramètres, exprimés en degrés décimaux
-	  // ex : g_calculateDistance(14,5;45,33;-12,15;18)
+	// calcule la distance, en km, entre deux points terrestres dont les coordonnées
+	// XY sont données en paramètres, exprimés en degrés décimaux
+	// ex : g_calculateDistance(14,5;45,33;-12,15;18)
 	
-	  //  cos(angle) = sin(latitude1)sin(latitude2)…
-	  //  …+cos(latitude1)cos(latitude2)cos(Longitude1-longitude2)
+	//  cos(angle) = sin(latitude1)sin(latitude2)…
+	//  …+cos(latitude1)cos(latitude2)cos(Longitude1-longitude2)
 	
-	  //SAMPLE : 
-	  //4D_CalculateDistance (-50,81;10,35;40,98;-80,53{;6371})
+	//SAMPLE : 
+	//4D_CalculateDistance (-50,81;10,35;40,98;-80,53{;6371})
 	
-	C_REAL:C285($1;$2;$3;$4;$5;$0)
-	C_REAL:C285($lat1rad;$Lon1rad;$lat2rad;$lon2rad;$dlon;$Radius;$result)
-	C_REAL:C285($Distance;$x;$Lat1;$Lat2;$Long1;$Long2)
+	var $1;$2;$3;$4;$5;$0 : Real
+	var $lat1rad;$Lon1rad;$lat2rad;$lon2rad;$dlon;$Radius;$result : Real
+	var $Distance;$x;$Lat1;$Lat2;$Long1;$Long2 : Real
 	
 	If (Count parameters:C259=4) | (Count parameters:C259=5)
 		$lon1:=$1
@@ -763,7 +791,7 @@ Function spherodistance
 		$lon2:=$3
 		$lat2:=$4
 		
-		  // Harvesine Formula
+		// Harvesine Formula
 		If (Count parameters:C259=5)
 			$Radius:=$5
 		Else 

@@ -1,4 +1,4 @@
-//%attributes = {"invisible":true,"preemptive":"capable"}
+//%attributes = {"invisible":true,"shared":true,"preemptive":"capable"}
 
   // LongInt2BinaryString ( longint ) -> return
   //
