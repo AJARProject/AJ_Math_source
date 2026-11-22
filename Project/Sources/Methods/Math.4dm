@@ -4,7 +4,18 @@
   //
   // Class : (object) return the object class Math
 
-If (False:C215)
+#DECLARE($param1 : Text; $param2 : Object) -> $return : Object
+var $o : Object
+var $text; $roundType : Text
+var $col : Collection
+var $a; $b; $c; $y; $dlat; $lon1; $lon2; $x : Real
+var $lat1rad; $Lon1rad; $lat2rad; $lon2rad; $dlon; $Radius : Real
+var $Distance; $Lat1; $Lat2; $Long1; $Long2 : Real
+var $valueToRound; $precision; $valueRounded; $roundedDif; $multiple : Real
+var $a_l; $b_l : Integer
+var $value : Variant
+
+If (False)
 	  // ----------------------------------------------------
 	  // User name (OS): Maurice Inzirillo
 	  // Date and time: 10.02.20, 11:59:00
@@ -17,28 +28,21 @@ If (False:C215)
 	  // ----------------------------------------------------
 End if 
 
-C_OBJECT:C1216($0;$o)
-C_TEXT:C284($1;$text)
-C_OBJECT:C1216($2;$o)
-C_COLLECTION:C1488($col)
-C_REAL:C285($a;$b;$c;$y;$dlat;$lon1;$lon2)
-C_LONGINT:C283($a_l;$b_l)
-C_VARIANT:C1683($value)
 
   // ------------------Constructor---------------------
-If (This:C1470[""]=Null:C1517)
+If (This[""]=Null)
 	
-	If (Count parameters:C259>=1)
+	If (Count parameters>=1)
 		
 		$text:=$1
 		
 	End if 
 	  //"E";Formula(Math ("E").value);
-	$o:=New object:C1471(\
+	$o:=New object(\
 		"";"Math";\
 		"value";$text;\
-		"success";False:C215;\
-		"errors";New collection:C1472;\
+		"success";False;\
+		"errors";New collection;\
 		"E";2.718281828459;\
 		"LN2";0.6931471805599;\
 		"LN10";2.302585092994;\
@@ -49,45 +53,45 @@ If (This:C1470[""]=Null:C1517)
 		"SQRT1_2";0.7071067811865;\
 		"Degree";0.01745329251994;\
 		"Radian";57.29577951308;\
-		"toRadians";Formula:C1597(Math ("toRadians";New object:C1471("num";$1)).value);\
-		"toDegrees";Formula:C1597(Math ("toDegrees";New object:C1471("num";$1)).value);\
-		"abs";Formula:C1597(Math ("abs";New object:C1471("num";$1)).value);\
-		"cos";Formula:C1597(Math ("cos";New object:C1471("num";$1)).value);\
-		"cosh";Formula:C1597(Math ("cosh";New object:C1471("num";$1)).value);\
-		"acos";Formula:C1597(Math ("acos";New object:C1471("num";$1)).value);\
-		"acosh";Formula:C1597(Math ("acosh";New object:C1471("num";$1)).value);\
-		"sin";Formula:C1597(Math ("sin";New object:C1471("num";$1)).value);\
-		"asin";Formula:C1597(Math ("asin";New object:C1471("num";$1)).value);\
-		"asinh";Formula:C1597(Math ("asinh";New object:C1471("num";$1)).value);\
-		"tan";Formula:C1597(Math ("tan";New object:C1471("num";$1)).value);\
-		"atan";Formula:C1597(Math ("atan";New object:C1471("num";$1)).value);\
-		"atan2";Formula:C1597(Math ("atan2";New object:C1471("y";$1;"x";$2)).value);\
-		"atanh";Formula:C1597(Math ("atanh";New object:C1471("num";$1)).value);\
-		"floor";Formula:C1597(Math ("floor";New object:C1471("num";$1)).value);\
-		"ceil";Formula:C1597(Math ("ceil";New object:C1471("num";$1)).value);\
-		"log";Formula:C1597(Math ("log";New object:C1471("num";$1)).value);\
-		"log10";Formula:C1597(Math ("log10";New object:C1471("num";$1)).value);\
-		"log2";Formula:C1597(Math ("log2";New object:C1471("num";$1)).value);\
-		"sqrt";Formula:C1597(Math ("sqrt";New object:C1471("num";$1)).value);\
-		"cbrt";Formula:C1597(Math ("cbrt";New object:C1471("num";$1)).value);\
-		"clz32";Formula:C1597(Math ("clz32";New object:C1471("num";$1)).value);\
-		"exp";Formula:C1597(Math ("exp";New object:C1471("num";$1)).value);\
-		"expm1";Formula:C1597(Math ("expm1";New object:C1471("num";$1)).value);\
-		"hypot";Formula:C1597(Math ("hypot";New object:C1471("num";$1)).value);\
-		"imul";Formula:C1597(Math ("imul";New object:C1471("num1";$1;"num2";$2)).value);\
-		"log1p";Formula:C1597(Math ("log1p";New object:C1471("num";$1)).value);\
-		"max";Formula:C1597(Math ("max";New object:C1471("num";$1)).value);\
-		"min";Formula:C1597(Math ("min";New object:C1471("num";$1)).value);\
-		"pow";Formula:C1597(Math ("pow";New object:C1471("base";$1;"exponent";$2)).value);\
-		"random";Formula:C1597(Math ("random";New object:C1471("num";$1)).value);\
-		"round";Formula:C1597(Math ("round";New object:C1471("num";$1)).value);\
-		"sign";Formula:C1597(Math ("sign";New object:C1471("num";$1)).value);\
-		"sinh";Formula:C1597(Math ("sinh";New object:C1471("num";$1)).value);\
-		"sqrt";Formula:C1597(Math ("sqrt";New object:C1471("num";$1)).value);\
-		"tanh";Formula:C1597(Math ("tanh";New object:C1471("num";$1)).value);\
-		"trunc";Formula:C1597(Math ("trunc";New object:C1471("num";$1)).value);\
-		"spherodistance";Formula:C1597(Math ("spherodistance";$1).value);\
-		"roundDecimal";Formula:C1597(Math ("roundDecimal";New object:C1471("num";$1;"precision";$2;"roundType";$3)).value)\
+		"toRadians";Formula(Math ("toRadians";New object("num";$1)).value);\
+		"toDegrees";Formula(Math ("toDegrees";New object("num";$1)).value);\
+		"abs";Formula(Math ("abs";New object("num";$1)).value);\
+		"cos";Formula(Math ("cos";New object("num";$1)).value);\
+		"cosh";Formula(Math ("cosh";New object("num";$1)).value);\
+		"acos";Formula(Math ("acos";New object("num";$1)).value);\
+		"acosh";Formula(Math ("acosh";New object("num";$1)).value);\
+		"sin";Formula(Math ("sin";New object("num";$1)).value);\
+		"asin";Formula(Math ("asin";New object("num";$1)).value);\
+		"asinh";Formula(Math ("asinh";New object("num";$1)).value);\
+		"tan";Formula(Math ("tan";New object("num";$1)).value);\
+		"atan";Formula(Math ("atan";New object("num";$1)).value);\
+		"atan2";Formula(Math ("atan2";New object("y";$1;"x";$2)).value);\
+		"atanh";Formula(Math ("atanh";New object("num";$1)).value);\
+		"floor";Formula(Math ("floor";New object("num";$1)).value);\
+		"ceil";Formula(Math ("ceil";New object("num";$1)).value);\
+		"log";Formula(Math ("log";New object("num";$1)).value);\
+		"log10";Formula(Math ("log10";New object("num";$1)).value);\
+		"log2";Formula(Math ("log2";New object("num";$1)).value);\
+		"sqrt";Formula(Math ("sqrt";New object("num";$1)).value);\
+		"cbrt";Formula(Math ("cbrt";New object("num";$1)).value);\
+		"clz32";Formula(Math ("clz32";New object("num";$1)).value);\
+		"exp";Formula(Math ("exp";New object("num";$1)).value);\
+		"expm1";Formula(Math ("expm1";New object("num";$1)).value);\
+		"hypot";Formula(Math ("hypot";New object("num";$1)).value);\
+		"imul";Formula(Math ("imul";New object("num1";$1;"num2";$2)).value);\
+		"log1p";Formula(Math ("log1p";New object("num";$1)).value);\
+		"max";Formula(Math ("max";New object("num";$1)).value);\
+		"min";Formula(Math ("min";New object("num";$1)).value);\
+		"pow";Formula(Math ("pow";New object("base";$1;"exponent";$2)).value);\
+		"random";Formula(Math ("random";New object("num";$1)).value);\
+		"round";Formula(Math ("round";New object("num";$1)).value);\
+		"sign";Formula(Math ("sign";New object("num";$1)).value);\
+		"sinh";Formula(Math ("sinh";New object("num";$1)).value);\
+		"sqrt";Formula(Math ("sqrt";New object("num";$1)).value);\
+		"tanh";Formula(Math ("tanh";New object("num";$1)).value);\
+		"trunc";Formula(Math ("trunc";New object("num";$1)).value);\
+		"spherodistance";Formula(Math ("spherodistance";$1).value);\
+		"roundDecimal";Formula(Math ("roundDecimal";New object("num";$1;"precision";$2;"roundType";$3)).value)\
 		)
 	
 	  //"spherodistance";Formula(Math ("spherodistance";New object("longitude1";$1;"latitude1";$2;"longitude2";$3;"latitude2";$4;"radius";$5)).value)
@@ -97,45 +101,45 @@ Else
 	
 	Case of 
 			  //=======================================================================================================
-		: (This:C1470=Null:C1517)
+		: (This=Null)
 			
-			ASSERT:C1129(False:C215;"OOPS, this method must be called from a member method")
+			ASSERT(False;"OOPS, this method must be called from a member method")
 			
 			  //=======================================================================================================
 		: ($1="setValue")  // Defines the value & returns the updated object
 			
-			$o:=This:C1470
+			$o:=This
 			$o.value:=$2.value
 			
 			  //=======================================================================================================
 		Else 
 			
-			$o:=New object:C1471(\
+			$o:=New object(\
 				"value";"")
 			
-			If (Count parameters:C259>1)
+			If (Count parameters>1)
 				  // argument filters
-				$vtype:=Value type:C1509($2)
+				$vtype:=Value type($2)
 				$o.value:=0
 				Case of 
-					: ($vtype=Is object:K8:27)
+					: ($vtype=Is object)
 						  //If (Not(Undefined($2.num)))
-						If ($2.num#Null:C1517)
-							If (Value type:C1509($2.num)#Is object:K8:27)
-								If (Value type:C1509($2.num)=Is collection:K8:32)
+						If ($2.num#Null)
+							If (Value type($2.num)#Is object)
+								If (Value type($2.num)=Is collection)
 									$col:=$2.num
 									If ($col.length=1)
 										$o.value:=$col[0]
 									End if 
 								Else 
-									If (Value type:C1509($2.num)#Is real:K8:4)
+									If (Value type($2.num)#Is real)
 										If ($2.num="-INF")
 											$o.value:=$2.num
 										Else 
-											$o.value:=Num:C11($2.num)
+											$o.value:=Num($2.num)
 										End if 
 									Else 
-										$o.value:=Num:C11($2.num)
+										$o.value:=Num($2.num)
 									End if 
 									
 								End if 
@@ -143,11 +147,11 @@ Else
 						End if 
 						  //End if 
 					Else 
-						$o.value:=Num:C11($2.num)
+						$o.value:=Num($2.num)
 				End case 
 			End if 
 			
-			$o.success:=True:C214
+			$o.success:=True
 			
 			Case of 
 					
@@ -195,61 +199,59 @@ Else
 					  //  //$o.value:=Radian
 					  //______________________________________________________
 				: ($1="toRadians")
-					$o.value:=$o.value*This:C1470.PI/180
+					$o.value:=$o.value*This.PI/180
 					  //______________________________________________________
 				: ($1="toDegrees")
-					$o.value:=$o.value*180/This:C1470.PI
+					$o.value:=$o.value*180/This.PI
 					  //______________________________________________________
 				: ($1="abs")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
-					$o.value:=Abs:C99($o.value)
+					$o.value:=Abs($o.value)
 					  //______________________________________________________
 				: ($1="cos")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cos
-					$o.value:=Cos:C18(Num:C11($o.value))
+					$o.value:=Cos(Num($o.value))
 					  //______________________________________________________
 				: ($1="acos")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cos
-					C_REAL:C285($x)
-					$x:=Num:C11($o.value)
-					If (This:C1470.abs($x)>1)
-						$o.success:=False:C215
+					$x:=Num($o.value)
+					If (This.abs($x)>1)
+						$o.success:=False
 						$o.value:=0
 					Else 
 						Case of 
 							: ($x=0)  // évitons une division par zéro
-								$o.value:=This:C1470.PI/2
+								$o.value:=This.PI/2
 							: ($x<0)
-								If (This:C1470.PI>4)  // Correction d'un bug 4D sur la valeur de Pi dans certaines conditions.
-									$o.value:=This:C1470.PI-This:C1470.atan(This:C1470.sqrt(1-This:C1470.pow($x;2))/This:C1470.abs($x))
+								If (This.PI>4)  // Correction d'un bug 4D sur la valeur de Pi dans certaines conditions.
+									$o.value:=This.PI-This.atan(This.sqrt(1-This.pow($x;2))/This.abs($x))
 								Else 
-									$o.value:=This:C1470.PI-This:C1470.atan(This:C1470.sqrt(1-This:C1470.pow($x;2))/This:C1470.abs($x))
+									$o.value:=This.PI-This.atan(This.sqrt(1-This.pow($x;2))/This.abs($x))
 								End if 
 							: ($x>0)
-								$o.value:=This:C1470.atan(This:C1470.sqrt(1-This:C1470.pow($x;2))/$x)
+								$o.value:=This.atan(This.sqrt(1-This.pow($x;2))/$x)
 						End case 
 					End if 
 					  //______________________________________________________
 				: ($1="cosh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acos
-					$o.value:=(Exp:C21(Num:C11($o.value))+Exp:C21(-Num:C11($o.value)))/2
+					$o.value:=(Exp(Num($o.value))+Exp(-Num($o.value)))/2
 					  //______________________________________________________
 				: ($1="sin")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sin
-					$o.value:=Sin:C17((Num:C11($o.value)))
+					$o.value:=Sin((Num($o.value)))
 					  //______________________________________________________
 				: ($1="asin")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asin
-					C_REAL:C285($x)
-					$x:=Num:C11($o.value)
-					If (This:C1470.abs($x)>1)
-						$o.success:=False:C215
+					$x:=Num($o.value)
+					If (This.abs($x)>1)
+						$o.success:=False
 						$o.value:=0
 					Else 
 						If ($x=1)
-							$o.value:=This:C1470.PI/2
+							$o.value:=This.PI/2
 						Else 
-							$o.value:=This:C1470.atan($x/(This:C1470.sqrt(1-This:C1470.pow($x;2))))  // result in radian
+							$o.value:=This.atan($x/(This.sqrt(1-This.pow($x;2))))  // result in radian
 						End if 
 					End if 
 					
@@ -257,15 +259,15 @@ Else
 					  //______________________________________________________
 				: ($1="asinh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asinh
-					$o.value:=This:C1470.log(Num:C11($o.value)+This:C1470.sqrt((Num:C11($o.value)*(Num:C11($o.value)))+1))
+					$o.value:=This.log(Num($o.value)+This.sqrt((Num($o.value)*(Num($o.value)))+1))
 					  //______________________________________________________
 				: ($1="tan")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tan
-					$o.value:=Tan:C19((Num:C11($o.value)))
+					$o.value:=Tan((Num($o.value)))
 					  //______________________________________________________
 				: ($1="atan")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan
-					$o.value:=Arctan:C20(Num:C11($o.value))
+					$o.value:=Arctan(Num($o.value))
 					  //______________________________________________________
 				: ($1="atan2")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
@@ -274,57 +276,57 @@ Else
 					
 					Case of 
 						: ($x>0)
-							$o.value:=This:C1470.atan($y/$x)
+							$o.value:=This.atan($y/$x)
 						: ($x<0) & ($y>=0)
-							$o.value:=This:C1470.atan($y/$x)+This:C1470.PI
+							$o.value:=This.atan($y/$x)+This.PI
 						: ($x<0) & ($y<0)
-							$o.value:=This:C1470.atan($y/$x)-This:C1470.PI
+							$o.value:=This.atan($y/$x)-This.PI
 						: ($x=0) & ($y>0)
-							$o.value:=(This:C1470.PI/2)
+							$o.value:=(This.PI/2)
 						: ($x=0) & ($y<0)
-							$o.value:=-(This:C1470.PI/2)
+							$o.value:=-(This.PI/2)
 						: ($x=0) & ($y=0)
 							$o.value:=0
 						Else 
-							$o.succes:=False:C215
+							$o.succes:=False
 					End case 
 					
 					  //______________________________________________________
 				: ($1="atanh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atanh
-					$o.value:=Log:C22((1+Num:C11($o.value))/(1-(Num:C11($o.value))))/2
+					$o.value:=Log((1+Num($o.value))/(1-(Num($o.value))))/2
 					  //______________________________________________________
 				: ($1="floor")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
-					$o.value:=Int:C8(Num:C11($o.value))
+					$o.value:=Int(Num($o.value))
 					  //______________________________________________________
 				: ($1="ceil")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil
-					$o.value:=-Int:C8(-Num:C11($o.value))
+					$o.value:=-Int(-Num($o.value))
 					  //______________________________________________________
 				: ($1="log")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
-					$o.value:=Log:C22(Num:C11($o.value))
+					$o.value:=Log(Num($o.value))
 					  //______________________________________________________
 				: ($1="log10")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
-					$o.value:=Log:C22(Num:C11($o.value))*This:C1470.LOG10E
+					$o.value:=Log(Num($o.value))*This.LOG10E
 					  //______________________________________________________
 				: ($1="log2")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
-					$o.value:=Log:C22(Num:C11($o.value))*This:C1470.LOG2E
+					$o.value:=Log(Num($o.value))*This.LOG2E
 					  //______________________________________________________
 				: ($1="acosh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acosh
-					$o.value:=This:C1470.log(Num:C11($o.value)+This:C1470.sqrt((Num:C11($o.value)*(Num:C11($o.value)))-1))
+					$o.value:=This.log(Num($o.value)+This.sqrt((Num($o.value)*(Num($o.value)))-1))
 					  //______________________________________________________
 				: ($1="sqrt")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
-					$o.value:=Square root:C539(Num:C11($o.value))
+					$o.value:=Square root(Num($o.value))
 					  //______________________________________________________
 				: ($1="cbrt")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cbrt
-					If (Value type:C1509($o.value)#Is real:K8:4)
+					If (Value type($o.value)#Is real)
 						If ($o.value="-INF") | ($o.value="INF")
 							  //
 						End if 
@@ -338,29 +340,29 @@ Else
 					  //______________________________________________________
 				: ($1="clz32")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/clz32
-					$o.value:=Position:C15("1";LongInt2BinaryString (Num:C11($o.value));1)-1
+					$o.value:=Position("1";LongInt2BinaryString (Num($o.value));1)-1
 					  //______________________________________________________
 				: ($1="exp")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/exp
-					$o.value:=Exp:C21(Num:C11($o.value))
+					$o.value:=Exp(Num($o.value))
 					  //______________________________________________________
 				: ($1="expm1")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/expm1
-					$o.value:=Exp:C21(Num:C11($o.value))-1
+					$o.value:=Exp(Num($o.value))-1
 					  //______________________________________________________
 				: ($1="hypot")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot
 					$count:=$col.length
 					
 					Case of 
-						: (Value type:C1509($col)=Is collection:K8:32) & ($count>1)
+						: (Value type($col)=Is collection) & ($count>1)
 							$sum:=0
 							For each ($value;$col)
-								$sum:=$sum+(Num:C11($value)^2)
+								$sum:=$sum+(Num($value)^2)
 							End for each 
-							$o.value:=This:C1470.sqrt($sum)
-						: (Value type:C1509($o.value)=Is real:K8:4)
-							$o.value:=This:C1470.sqrt(Num:C11($o.value)^2)
+							$o.value:=This.sqrt($sum)
+						: (Value type($o.value)=Is real)
+							$o.value:=This.sqrt(Num($o.value)^2)
 							
 						Else 
 							
@@ -374,7 +376,7 @@ Else
 					  //______________________________________________________
 				: ($1="log1p")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log1p
-					$o.value:=This:C1470.log(1+Num:C11($o.value))
+					$o.value:=This.log(1+Num($o.value))
 					  //______________________________________________________
 				: ($1="max")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
@@ -390,49 +392,49 @@ Else
 					  //______________________________________________________
 				: ($1="random")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-					$o.value:=Random:C100/MAXINT:K35:1
+					$o.value:=Random/MAXINT
 					  //______________________________________________________
 				: ($1="round")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
-					If (Num:C11($o.value)<0)
-						$o.value:=Round:C94(Num:C11($o.value)+0.01;0)
+					If (Num($o.value)<0)
+						$o.value:=Round(Num($o.value)+0.01;0)
 					Else 
-						$o.value:=Round:C94(Num:C11($o.value);0)
+						$o.value:=Round(Num($o.value);0)
 					End if 
 					  //______________________________________________________
 				: ($1="sign")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
 					Case of 
-						: (Num:C11($o.value)>0)
+						: (Num($o.value)>0)
 							$o.value:=1
-						: (Num:C11($o.value)=0)
+						: (Num($o.value)=0)
 							$o.value:=0
-						: (Num:C11($o.value)<0)
+						: (Num($o.value)<0)
 							$o.value:=-1
 					End case 
 					  //______________________________________________________
 				: ($1="sinh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sinh
-					$y:=This:C1470.exp(Num:C11($o.value))
+					$y:=This.exp(Num($o.value))
 					$o.value:=($y-(1/$y))/2
 					
 					  //______________________________________________________
 				: ($1="sqrt")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
-					$y:=This:C1470.exp(Num:C11($o.value))
+					$y:=This.exp(Num($o.value))
 					$o.value:=($y-(1/$y))/2
 					  //______________________________________________________
 				: ($1="tanh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tanh
-					$a:=This:C1470.exp(Num:C11($o.value))
-					$b:=This:C1470.exp(-Num:C11($o.value))
+					$a:=This.exp(Num($o.value))
+					$b:=This.exp(-Num($o.value))
 					$o.value:=($a-$b)/($a+$b)
 					  //______________________________________________________
 				: ($1="trunc")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
-					$str:=String:C10(Num:C11($o.value))
-					GET SYSTEM FORMAT:C994(Decimal separator:K60:1;$vDecSep)
-					$o.value:=Num:C11(Substring:C12($str;1;Position:C15($vDecSep;$str)-1))
+					$str:=String(Num($o.value))
+					GET SYSTEM FORMAT(Decimal separator;$vDecSep)
+					$o.value:=Num(Substring($str;1;Position($vDecSep;$str)-1))
 					  //______________________________________________________
 				: ($1="spherodistance")
 					  // Olivier Deschanels request and code
@@ -454,8 +456,6 @@ Else
 					  //4D_CalculateDistance (-50,81;10,35;40,98;-80,53{;6371})
 					  // "latitude1";$1;"longitude1";$2;"latitude2";$3;"longitude2";$4;"radius";$5
 					
-					C_REAL:C285($lat1rad;$Lon1rad;$lat2rad;$lon2rad;$dlon;$Radius)
-					C_REAL:C285($Distance;$x;$Lat1;$Lat2;$Long1;$Long2)
 					
 					$lon1:=$2.longitude1
 					$lat1:=$2.latitude1
@@ -505,17 +505,17 @@ Else
 					  //$o.value:=$Radius*$c
 					
 					  // Method 3 - Harvesine Formula
-					If ($2.radius#Null:C1517)
+					If ($2.radius#Null)
 						$Radius:=$2.radius
 					Else 
 						$Radius:=6371  //6371 = earth radius
 					End if 
-					$lat1rad:=This:C1470.toRadians($lat1)
-					$lat2rad:=This:C1470.toRadians($lat2)
-					$dlat:=This:C1470.toRadians($lat2-$lat1)
-					$dlon:=This:C1470.toRadians($lon2-$lon1)
-					$a:=(This:C1470.pow(This:C1470.sin($dlat/2);2))+(This:C1470.cos($lat1rad)*This:C1470.cos($lat2rad)*This:C1470.pow(This:C1470.sin($dlon/2);2))
-					$c:=2*This:C1470.atan2(This:C1470.sqrt($a);This:C1470.sqrt(1-$a))
+					$lat1rad:=This.toRadians($lat1)
+					$lat2rad:=This.toRadians($lat2)
+					$dlat:=This.toRadians($lat2-$lat1)
+					$dlon:=This.toRadians($lon2-$lon1)
+					$a:=(This.pow(This.sin($dlat/2);2))+(This.cos($lat1rad)*This.cos($lat2rad)*This.pow(This.sin($dlon/2);2))
+					$c:=2*This.atan2(This.sqrt($a);This.sqrt(1-$a))
 					$o.value:=$Radius*$c
 					
 					  // Method 4
@@ -553,7 +553,7 @@ Else
 					  //
 					  // Return a rounded value based on the given options
 					
-					If (False:C215)
+					If (False)
 						  // ----------------------------------------------------
 						  // User name (OS): gabriel inzirillo
 						  // Date and time: 23.01.19, 11:26:55
@@ -608,14 +608,9 @@ Else
 						  // Copyrights (C) AJAR SA - 2019
 					End if 
 					
-					C_REAL:C285($valueToRound)
-					C_REAL:C285($precision)
-					C_TEXT:C284($roundType)
-					C_REAL:C285($valueRounded)
-					C_REAL:C285($roundedDif;$multiple)
 					
-					If ($2.num=Null:C1517) | ($2.precision=Null:C1517) | ($2.roundType=Null:C1517)
-						ASSERT:C1129(False:C215;"You must give the 3 mandatory parameters to do the rounding.")
+					If ($2.num=Null) | ($2.precision=Null) | ($2.roundType=Null)
+						ASSERT(False;"You must give the 3 mandatory parameters to do the rounding.")
 					Else 
 						$valueToRound:=$2.num
 						$precision:=$2.precision
@@ -628,8 +623,8 @@ Else
 							$multiple:=1/$precision
 						End if 
 						
-						$valueRounded:=Round:C94($valueToRound*$multiple;0)/$multiple
-						$roundedDif:=Abs:C99(($valueRounded-$valueToRound)*$multiple)  // Difference between the rounded value and the notRounded value to see if it is in the half (=0.5)
+						$valueRounded:=Round($valueToRound*$multiple;0)/$multiple
+						$roundedDif:=Abs(($valueRounded-$valueToRound)*$multiple)  // Difference between the rounded value and the notRounded value to see if it is in the half (=0.5)
 						
 						  // Cast the good rounding type
 						  // Can depend of the sign of the number (positive or negative)
@@ -667,16 +662,16 @@ Else
 								  // ROUND_HALF_FLOOR when rounded difference is 0.5 is a ROUND_FLOOR
 								$roundType:="ROUND_FLOOR"
 								
-							: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=0) & ($valueToRound>0)
+							: ($roundType="ROUND_HALF_EVEN") & ((Int(Abs($valueToRound*$multiple))%2)=0) & ($valueToRound>0)
 								  // ROUND_HALF_EVEN when nearest neighbor is even and value is positive is a ROUND_FLOOR
 								$roundType:="ROUND_FLOOR"
-							: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=0) & ($valueToRound<0)
+							: ($roundType="ROUND_HALF_EVEN") & ((Int(Abs($valueToRound*$multiple))%2)=0) & ($valueToRound<0)
 								  // ROUND_HALF_EVEN when nearest neighbor is even and value is negative is a ROUND_CEILING
 								$roundType:="ROUND_CEILING"
-							: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=1) & ($valueToRound>0)
+							: ($roundType="ROUND_HALF_EVEN") & ((Int(Abs($valueToRound*$multiple))%2)=1) & ($valueToRound>0)
 								  // ROUND_HALF_EVEN when nearest neighbor is odd and value is positive is a ROUND_CEILING
 								$roundType:="ROUND_CEILING"
-							: ($roundType="ROUND_HALF_EVEN") & ((Int:C8(Abs:C99($valueToRound*$multiple))%2)=1) & ($valueToRound<0)
+							: ($roundType="ROUND_HALF_EVEN") & ((Int(Abs($valueToRound*$multiple))%2)=1) & ($valueToRound<0)
 								  // ROUND_HALF_EVEN when nearest neighbor is odd and value is negative is a ROUND_FLOOR
 								$roundType:="ROUND_FLOOR"
 						End case 
@@ -713,7 +708,7 @@ Else
 					
 					$o.value:=$valueRounded
 				Else 
-					$o.success:=False:C215
+					$o.success:=False
 					$o.success:=0
 			End case 
 	End case 
@@ -721,5 +716,5 @@ End if
 
   // ----------------------------------------------------
   // Return
-$0:=$o
+$return:=$o
 

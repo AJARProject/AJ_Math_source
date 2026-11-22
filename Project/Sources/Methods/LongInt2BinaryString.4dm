@@ -5,7 +5,11 @@
   // longint : (longint) any value
   // return : (text) return a bianry string
 
-If (False:C215)
+#DECLARE($param1 : Integer) -> $return : Text
+var $longint : Integer
+var $string : Text
+
+If (False)
 	  // ----------------------------------------------------
 	  // User name (OS): Maurice Inzirillo
 	  // Date and time: 17.02.20, 14:45:56
@@ -18,14 +22,12 @@ If (False:C215)
 	  // ----------------------------------------------------
 End if 
 
-C_LONGINT:C283($1;$longint)
 $longint:=$1
-C_TEXT:C284($0;$string)
 $string:=""
 
 For ($i;0;31)  // 4 bytes
 	$test:=$longint ?? $i
-	$string:=Choose:C955($test;"1";"0")+$string
+	$string:=Choose($test;"1";"0")+$string
 End for 
 
-$0:=$string
+$return:=$string
