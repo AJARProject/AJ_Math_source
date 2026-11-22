@@ -81,11 +81,11 @@ If (This[""]=Null)
 		"clz32";Formula(Math ("clz32";New object("num";$1)).value);\
 		"exp";Formula(Math ("exp";New object("num";$1)).value);\
 		"expm1";Formula(Math ("expm1";New object("num";$1)).value);\
-		"hypot";Formula(Math ("hypot";New object("num";$1)).value);\
+		"hypot";Formula(Math ("hypot";New object("num";(Value type($1)=Is collection) ? $1 : Copy parameters)).value);\
 		"imul";Formula(Math ("imul";New object("num1";$1;"num2";$2)).value);\
 		"log1p";Formula(Math ("log1p";New object("num";$1)).value);\
-		"max";Formula(Math ("max";New object("num";$1)).value);\
-		"min";Formula(Math ("min";New object("num";$1)).value);\
+		"max";Formula(Math ("max";New object("num";(Value type($1)=Is collection) ? $1 : Copy parameters)).value);\
+		"min";Formula(Math ("min";New object("num";(Value type($1)=Is collection) ? $1 : Copy parameters)).value);\
 		"pow";Formula(Math ("pow";New object("base";$1;"exponent";$2)).value);\
 		"random";Formula(Math ("random";New object("num";$1)).value);\
 		"round";Formula(Math ("round";New object("num";$1)).value);\
