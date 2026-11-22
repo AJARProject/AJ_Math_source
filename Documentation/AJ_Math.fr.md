@@ -38,7 +38,7 @@ Le composant compilé n'est pas dans ce dépôt.
 
 ## Fiche API — méthodes partagées
 
-Toutes sont `"shared":true` et `"invisible":true`. Les paramètres positionnels `$1`, `$2` restent valables dans le corps après `#DECLARE` ([paramètres](https://developer.4d.com/docs/21-R4/Concepts/parameters)). `Count parameters` compte les arguments réellement passés. Les paramètres omis prennent la valeur par défaut du type.
+Toutes sont `"shared":true` et `"invisible":true`. Le corps utilise les noms de `#DECLARE` (`$param1`, `$param2`, …), pas `$1` / `$2` ([paramètres](https://developer.4d.com/docs/21-R4/Concepts/parameters)). `Count parameters` compte les arguments réellement passés. Les paramètres omis prennent la valeur par défaut du type. Les `Formula` construites par `Math()` gardent `$1`, `$2`, `$3` : ce sont les arguments de la formule quand l'hôte appelle `$math.sin(x)`, pas les paramètres de la méthode.
 
 La syntaxe `C_XXX` et `var $1` est dépréciée depuis 4D 20 R7 ([variables](https://developer.4d.com/docs/21-R4/Concepts/variables), [paramètres](https://developer.4d.com/docs/21-R4/Concepts/parameters)). `var $n : Integer` est un entier long (`C_LONGINT`). Une méthode déclare ses paramètres avec `#DECLARE`. Une fonction de classe les déclare sur la ligne `Function` : `var` sur un paramètre « will generate errors ».
 
@@ -50,9 +50,9 @@ Les fiches Explorer d'origine (`Documentation/Methods/`) gardent leurs exemples 
 #DECLARE($param1 : Text; $param2 : Object) -> $return : Object
 ```
 
-`$param1` (`$1`) : texte optionnel. À la construction, copié dans `value`. Lors d'un appel membre, c'est le nom de fonction (`"sin"`, `"asin"`, …).
+`$param1` : texte optionnel. À la construction, copié dans `value`. Lors d'un appel membre, c'est le nom de fonction (`"sin"`, `"asin"`, …).
 
-`$param2` (`$2`) : objet optionnel. Arguments (`num`, `y`/`x`, `num1`/`num2`, `base`/`exponent`, ou `longitude1`, `latitude1`, `longitude2`, `latitude2`, `radius`, ou `num`/`precision`/`roundType`).
+`$param2` : objet optionnel. Arguments (`num`, `y`/`x`, `num1`/`num2`, `base`/`exponent`, ou `longitude1`, `latitude1`, `longitude2`, `latitude2`, `radius`, ou `num`/`precision`/`roundType`).
 
 Retour : objet. À la construction (`Math()` ou `Math` sans que `This[""]` soit déjà `"Math"`), l'objet porte les constantes et les formules. Un appel membre renvoie `{value; success}` (`success` vaut `True` si le nom est reconnu).
 
@@ -132,7 +132,7 @@ Les fonctions prennent des réels (sauf mention) et renvoient un réel. Si `Coun
 | `round`, `sign`, `sqrt`, `trunc` | réel → réel | Même règles que la méthode pour `round` et `trunc`. |
 | `toRadians`, `toDegrees` | réel → réel | |
 | `roundDecimal` | réel, réel, texte → réel | Trois arguments obligatoires (`Count parameters#3` → `NaN`). Mêmes noms `ROUND_*`. |
-| `spherodistance` | 4 ou 5 réels → réel | `$1` longitude1, `$2` latitude1, `$3` longitude2, `$4` latitude2, `$5` rayon optionnel (défaut 6371). |
+| `spherodistance` | 4 ou 5 réels → réel | `$param1` longitude1, `$param2` latitude1, `$param3` longitude2, `$param4` latitude2, `$param5` rayon optionnel (défaut 6371). |
 
 ### `AJ_Math_info` → texte
 
@@ -150,7 +150,7 @@ Le numéro `2.0.1+Build47` est inchangé. Le libellé passe de `v19 R8` à `v21 
 #DECLARE($param1 : Integer) -> $return : Text
 ```
 
-`$param1` (`$1`) : entier long. Retour : 32 caractères `0`/`1`, bit 31 à gauche. Boucle `0` à `31`, test de bit `??` ([opérateurs](https://developer.4d.com/docs/21-R4/Concepts/number)), [`Choose`](https://developer.4d.com/docs/21-R4/commands/choose). Attribut `preemptive: capable` inchangé. `clz32` s'en sert.
+`$param1` : entier long. Retour : 32 caractères `0`/`1`, bit 31 à gauche. Boucle `0` à `31`, test de bit `??` ([opérateurs](https://developer.4d.com/docs/21-R4/Concepts/number)), [`Choose`](https://developer.4d.com/docs/21-R4/commands/choose). Attribut `preemptive: capable` inchangé. `clz32` s'en sert.
 
 ## Méthodes non partagées
 
@@ -166,8 +166,9 @@ Le numéro `2.0.1+Build47` est inchangé. Le libellé passe de `v19 R8` à `v21 
 - `Project/Sources/settings.4DSettings` : notation objet et méthodes Unicode, dans `<database><misc>`. Le bloc `<compiler>` d'origine est gardé.
 - `Settings/buildApp.4DSettings` ajouté pour la génération du composant. Il n'existait pas sur `master`.
 - Jetons `:C` et `:K` retirés. Noms de commandes et de constantes inchangés. Aucune commande `_o_` n'était présente ; aucune commande n'a été renommée.
-- `C_XXX` remplacé par `var`. `C_LONGINT` devient `Integer`. Paramètres et valeur de retour des méthodes : `#DECLARE`, placé avant le premier ordre (les commentaires et `//%attributes` restent au-dessus). Le corps continue d'utiliser `$1`, `$2` et `Count parameters`. L'ancienne valeur `$0` s'appelle `$return` et reste distincte des variables de travail (`$o`, `$string`, `$result`, …).
+- `C_XXX` remplacé par `var`. `C_LONGINT` devient `Integer`. Paramètres et valeur de retour des méthodes : `#DECLARE`, placé avant le premier ordre (les commentaires et `//%attributes` restent au-dessus). Le corps utilise `$param1`, `$param2` et `Count parameters`. L'ancienne valeur `$0` s'appelle `$return` et reste distincte des variables de travail (`$o`, `$string`, `$result`, …). Les `Formula` de `Math()` gardent `$1` / `$2` / `$3`.
 - Fonctions de classe : paramètres sur la ligne `Function`, plus de `var $0` / `var $1`. `hypot` utilise `(... : Real)` à la place de `var ${1}` ([paramètres variadiques](https://developer.4d.com/docs/21-R4/Concepts/parameters)). La boucle `${$i}` est la même. `random` reste `-> Integer`, sans parenthèses vides (forme `Function getValue -> $v` de la même page).
+- Compilation 21 R4 (build 21R4.100185) : chaque locale signalée est déclarée avec `var` (`Integer`, `Real`, `Text` ou `Boolean`). Les constantes de la classe (`E`, `PI`, `NaN`, …) sont déclarées avec `property` ([classes](https://developer.4d.com/docs/21-R4/Concepts/classes)), hors du constructeur. Le constructeur continue de les affecter.
 - `AJ_Math_info` annonce `v21 R4`. Le numéro `2.0.1+Build47` ne change pas.
 - `.gitignore` : `*.4DD`, `*.journal`, `*.4DIndy`, `*.4DIndx` (extension réelle des index), `*.Match`, `*.match`, `userPreferences.*/`, `Logs/`, `DerivedData/`, `.DS_Store`, `Data/`. Les `*.4DSettings` ne sont plus ignorés, sinon les réglages de compatibilité ne pourraient pas être versionnés. Les archives et caches listés par l'ancien fichier (`.4darchive`, `HDI*`, `Preferences`, `Builds`, …) ne sont plus ignorés : ce dépôt n'en a pas.
 - Comportement et noms publics inchangés : `Math()`, `AJ_Math.new()`, `AJ_Math_info`, `LongInt2BinaryString`, et les noms de formules / fonctions. Les écarts déjà présents (faute `succes`, second `sqrt`, `imul`, `log2`, `random` entier) sont laissés.

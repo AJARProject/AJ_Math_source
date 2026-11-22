@@ -14,6 +14,10 @@ var $Distance; $Lat1; $Lat2; $Long1; $Long2 : Real
 var $valueToRound; $precision; $valueRounded; $roundedDif; $multiple : Real
 var $a_l; $b_l : Integer
 var $value : Variant
+var $vtype : Integer
+var $count : Real
+var $sum : Real
+var $str; $vDecSep : Text
 
 If (False)
 	  // ----------------------------------------------------
@@ -34,7 +38,7 @@ If (This[""]=Null)
 	
 	If (Count parameters>=1)
 		
-		$text:=$1
+		$text:=$param1
 		
 	End if 
 	  //"E";Formula(Math ("E").value);
@@ -106,10 +110,10 @@ Else
 			ASSERT(False;"OOPS, this method must be called from a member method")
 			
 			  //=======================================================================================================
-		: ($1="setValue")  // Defines the value & returns the updated object
+		: ($param1="setValue")  // Defines the value & returns the updated object
 			
 			$o:=This
-			$o.value:=$2.value
+			$o.value:=$param2.value
 			
 			  //=======================================================================================================
 		Else 
@@ -119,27 +123,27 @@ Else
 			
 			If (Count parameters>1)
 				  // argument filters
-				$vtype:=Value type($2)
+				$vtype:=Value type($param2)
 				$o.value:=0
 				Case of 
 					: ($vtype=Is object)
 						  //If (Not(Undefined($2.num)))
-						If ($2.num#Null)
-							If (Value type($2.num)#Is object)
-								If (Value type($2.num)=Is collection)
-									$col:=$2.num
+						If ($param2.num#Null)
+							If (Value type($param2.num)#Is object)
+								If (Value type($param2.num)=Is collection)
+									$col:=$param2.num
 									If ($col.length=1)
 										$o.value:=$col[0]
 									End if 
 								Else 
-									If (Value type($2.num)#Is real)
-										If ($2.num="-INF")
-											$o.value:=$2.num
+									If (Value type($param2.num)#Is real)
+										If ($param2.num="-INF")
+											$o.value:=$param2.num
 										Else 
-											$o.value:=Num($2.num)
+											$o.value:=Num($param2.num)
 										End if 
 									Else 
-										$o.value:=Num($2.num)
+										$o.value:=Num($param2.num)
 									End if 
 									
 								End if 
@@ -147,7 +151,7 @@ Else
 						End if 
 						  //End if 
 					Else 
-						$o.value:=Num($2.num)
+						$o.value:=Num($param2.num)
 				End case 
 			End if 
 			
@@ -198,21 +202,21 @@ Else
 					  //$o.value:=57.29577951308
 					  //  //$o.value:=Radian
 					  //______________________________________________________
-				: ($1="toRadians")
+				: ($param1="toRadians")
 					$o.value:=$o.value*This.PI/180
 					  //______________________________________________________
-				: ($1="toDegrees")
+				: ($param1="toDegrees")
 					$o.value:=$o.value*180/This.PI
 					  //______________________________________________________
-				: ($1="abs")
+				: ($param1="abs")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 					$o.value:=Abs($o.value)
 					  //______________________________________________________
-				: ($1="cos")
+				: ($param1="cos")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cos
 					$o.value:=Cos(Num($o.value))
 					  //______________________________________________________
-				: ($1="acos")
+				: ($param1="acos")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cos
 					$x:=Num($o.value)
 					If (This.abs($x)>1)
@@ -233,15 +237,15 @@ Else
 						End case 
 					End if 
 					  //______________________________________________________
-				: ($1="cosh")
+				: ($param1="cosh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acos
 					$o.value:=(Exp(Num($o.value))+Exp(-Num($o.value)))/2
 					  //______________________________________________________
-				: ($1="sin")
+				: ($param1="sin")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sin
 					$o.value:=Sin((Num($o.value)))
 					  //______________________________________________________
-				: ($1="asin")
+				: ($param1="asin")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asin
 					$x:=Num($o.value)
 					If (This.abs($x)>1)
@@ -257,22 +261,22 @@ Else
 					
 					  //$o.value:=This.atan2($x;This.sqrt((1+$x)*(1-$x)))
 					  //______________________________________________________
-				: ($1="asinh")
+				: ($param1="asinh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asinh
 					$o.value:=This.log(Num($o.value)+This.sqrt((Num($o.value)*(Num($o.value)))+1))
 					  //______________________________________________________
-				: ($1="tan")
+				: ($param1="tan")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tan
 					$o.value:=Tan((Num($o.value)))
 					  //______________________________________________________
-				: ($1="atan")
+				: ($param1="atan")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan
 					$o.value:=Arctan(Num($o.value))
 					  //______________________________________________________
-				: ($1="atan2")
+				: ($param1="atan2")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
-					$y:=$2.y
-					$x:=$2.x
+					$y:=$param2.y
+					$x:=$param2.x
 					
 					Case of 
 						: ($x>0)
@@ -292,39 +296,39 @@ Else
 					End case 
 					
 					  //______________________________________________________
-				: ($1="atanh")
+				: ($param1="atanh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atanh
 					$o.value:=Log((1+Num($o.value))/(1-(Num($o.value))))/2
 					  //______________________________________________________
-				: ($1="floor")
+				: ($param1="floor")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 					$o.value:=Int(Num($o.value))
 					  //______________________________________________________
-				: ($1="ceil")
+				: ($param1="ceil")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil
 					$o.value:=-Int(-Num($o.value))
 					  //______________________________________________________
-				: ($1="log")
+				: ($param1="log")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
 					$o.value:=Log(Num($o.value))
 					  //______________________________________________________
-				: ($1="log10")
+				: ($param1="log10")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
 					$o.value:=Log(Num($o.value))*This.LOG10E
 					  //______________________________________________________
-				: ($1="log2")
+				: ($param1="log2")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log
 					$o.value:=Log(Num($o.value))*This.LOG2E
 					  //______________________________________________________
-				: ($1="acosh")
+				: ($param1="acosh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acosh
 					$o.value:=This.log(Num($o.value)+This.sqrt((Num($o.value)*(Num($o.value)))-1))
 					  //______________________________________________________
-				: ($1="sqrt")
+				: ($param1="sqrt")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
 					$o.value:=Square root(Num($o.value))
 					  //______________________________________________________
-				: ($1="cbrt")
+				: ($param1="cbrt")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cbrt
 					If (Value type($o.value)#Is real)
 						If ($o.value="-INF") | ($o.value="INF")
@@ -338,19 +342,19 @@ Else
 						End if 
 					End if 
 					  //______________________________________________________
-				: ($1="clz32")
+				: ($param1="clz32")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/clz32
 					$o.value:=Position("1";LongInt2BinaryString (Num($o.value));1)-1
 					  //______________________________________________________
-				: ($1="exp")
+				: ($param1="exp")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/exp
 					$o.value:=Exp(Num($o.value))
 					  //______________________________________________________
-				: ($1="expm1")
+				: ($param1="expm1")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/expm1
 					$o.value:=Exp(Num($o.value))-1
 					  //______________________________________________________
-				: ($1="hypot")
+				: ($param1="hypot")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot
 					$count:=$col.length
 					
@@ -368,33 +372,33 @@ Else
 							
 					End case 
 					  //______________________________________________________
-				: ($1="imul")
+				: ($param1="imul")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul
-					$a_l:=$2.num1
-					$b_l:=$2.num2
+					$a_l:=$param2.num1
+					$b_l:=$param2.num2
 					$o.value:=$a_l*$b_l
 					  //______________________________________________________
-				: ($1="log1p")
+				: ($param1="log1p")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log1p
 					$o.value:=This.log(1+Num($o.value))
 					  //______________________________________________________
-				: ($1="max")
+				: ($param1="max")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
 					$o.value:=$col.max()
 					  //______________________________________________________
-				: ($1="min")
+				: ($param1="min")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min
 					$o.value:=$col.min()
 					  //______________________________________________________
-				: ($1="pow")
+				: ($param1="pow")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
-					$o.value:=$2.base^$2.exponent
+					$o.value:=$param2.base^$param2.exponent
 					  //______________________________________________________
-				: ($1="random")
+				: ($param1="random")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 					$o.value:=Random/MAXINT
 					  //______________________________________________________
-				: ($1="round")
+				: ($param1="round")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
 					If (Num($o.value)<0)
 						$o.value:=Round(Num($o.value)+0.01;0)
@@ -402,7 +406,7 @@ Else
 						$o.value:=Round(Num($o.value);0)
 					End if 
 					  //______________________________________________________
-				: ($1="sign")
+				: ($param1="sign")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
 					Case of 
 						: (Num($o.value)>0)
@@ -413,30 +417,30 @@ Else
 							$o.value:=-1
 					End case 
 					  //______________________________________________________
-				: ($1="sinh")
+				: ($param1="sinh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sinh
 					$y:=This.exp(Num($o.value))
 					$o.value:=($y-(1/$y))/2
 					
 					  //______________________________________________________
-				: ($1="sqrt")
+				: ($param1="sqrt")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt
 					$y:=This.exp(Num($o.value))
 					$o.value:=($y-(1/$y))/2
 					  //______________________________________________________
-				: ($1="tanh")
+				: ($param1="tanh")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tanh
 					$a:=This.exp(Num($o.value))
 					$b:=This.exp(-Num($o.value))
 					$o.value:=($a-$b)/($a+$b)
 					  //______________________________________________________
-				: ($1="trunc")
+				: ($param1="trunc")
 					  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
 					$str:=String(Num($o.value))
 					GET SYSTEM FORMAT(Decimal separator;$vDecSep)
 					$o.value:=Num(Substring($str;1;Position($vDecSep;$str)-1))
 					  //______________________________________________________
-				: ($1="spherodistance")
+				: ($param1="spherodistance")
 					  // Olivier Deschanels request and code
 					  // calculates the distance between two points on earth
 					  // (or any other sphere, if a fifth parameter is given to define the radius)
@@ -457,10 +461,10 @@ Else
 					  // "latitude1";$1;"longitude1";$2;"latitude2";$3;"longitude2";$4;"radius";$5
 					
 					
-					$lon1:=$2.longitude1
-					$lat1:=$2.latitude1
-					$lon2:=$2.longitude2
-					$lat2:=$2.latitude2
+					$lon1:=$param2.longitude1
+					$lat1:=$param2.latitude1
+					$lon2:=$param2.longitude2
+					$lat2:=$param2.latitude2
 					
 					  // Method 1
 					
@@ -505,8 +509,8 @@ Else
 					  //$o.value:=$Radius*$c
 					
 					  // Method 3 - Harvesine Formula
-					If ($2.radius#Null)
-						$Radius:=$2.radius
+					If ($param2.radius#Null)
+						$Radius:=$param2.radius
 					Else 
 						$Radius:=6371  //6371 = earth radius
 					End if 
@@ -543,7 +547,7 @@ Else
 					  //$distance:=$distance*60*1.1515
 					  //$o.value:=$distance*1.609344 // km
 					
-				: ($1="roundDecimal")
+				: ($param1="roundDecimal")
 					  // AJ_Tools_RoundDecimal ( $valueToRound ; $precision ; $roundType ) -> return $valueRounded
 					  //
 					  // $valueToRound : (real) value to be rounded
@@ -609,12 +613,12 @@ Else
 					End if 
 					
 					
-					If ($2.num=Null) | ($2.precision=Null) | ($2.roundType=Null)
+					If ($param2.num=Null) | ($param2.precision=Null) | ($param2.roundType=Null)
 						ASSERT(False;"You must give the 3 mandatory parameters to do the rounding.")
 					Else 
-						$valueToRound:=$2.num
-						$precision:=$2.precision
-						$roundType:=$2.roundType
+						$valueToRound:=$param2.num
+						$precision:=$param2.precision
+						$roundType:=$param2.roundType
 						
 						If ($precision#0)
 							  // $multiple is the multiple that will help to do the rounding using the 4D Round command

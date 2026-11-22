@@ -8,6 +8,8 @@
 #DECLARE($param1 : Integer) -> $return : Text
 var $longint : Integer
 var $string : Text
+var $i : Integer
+var $test : Boolean
 
 If (False)
 	  // ----------------------------------------------------
@@ -22,7 +24,7 @@ If (False)
 	  // ----------------------------------------------------
 End if 
 
-$longint:=$1
+$longint:=$param1
 $string:=""
 
 For ($i;0;31)  // 4 bytes

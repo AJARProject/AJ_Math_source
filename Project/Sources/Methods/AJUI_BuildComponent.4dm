@@ -13,8 +13,11 @@
 
 #DECLARE($param1 : Text)
 var $projectMethodPath_t; $code_t; $method : Text
+var $positionStart_l; $positionEnd_l; $positionStartNumber_l; $lengthNumber_l : Integer
+var $previousReleaseNumber_t; $buildRelease_t0; $buildRelease_t; $releaseNumber_t; $path_t : Text
+var $buildRelease_l : Real
 
-$method:=$1
+$method:=$param1
 
 $projectMethodPath_t:=METHOD Get path(Path project method; $method; *)
 METHOD GET CODE($projectMethodPath_t; $code_t; *)  // code of the method "tip_release"

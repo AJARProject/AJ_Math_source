@@ -1,3 +1,17 @@
+property E : Real
+property LN2 : Real
+property LN10 : Real
+property LOG10E : Real
+property LOG2E : Real
+property PI : Real
+property SQRT2 : Real
+property SQRT1_2 : Real
+property Degree : Real
+property Radian : Real
+property NaN : Real
+property POSITIVE_INFINITY : Real
+property NEGATIVE_INFINITY : Real
+
 Class constructor
 	This.E:=2.718281828459
 	This.LN2:=0.6931471805599
@@ -19,7 +33,7 @@ Function abs($param1 : Real) -> $return : Real
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
 	
 	If (Count parameters=1)
-		$return:=Abs($1)
+		$return:=Abs($param1)
 	Else 
 		$return:=This.NaN
 	End if 
@@ -31,7 +45,7 @@ Function acos($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		
 		If ($value>1) | ($value<-1)
 			$result:=This.NaN
@@ -69,7 +83,7 @@ Function acosh($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=This.log($value+This.sqrt(($value*($value))-1))
 	Else 
 		$result:=This.NaN
@@ -83,7 +97,7 @@ Function asin($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		If ($value>1) | ($value<-1)
 			$result:=This.NaN
 		Else 
@@ -105,7 +119,7 @@ Function asinh($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=This.log($value+This.sqrt(($value*($value))+1))
 	Else 
 		$result:=This.NaN
@@ -119,7 +133,7 @@ Function atan($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$result:=Arctan($1)
+		$result:=Arctan($param1)
 	Else 
 		$result:=This.NaN
 	End if 
@@ -131,8 +145,8 @@ Function atan2($param1 : Real; $param2 : Real) -> $return : Real
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
 	
 	var $result; $y; $x : Real
-	$y:=$1
-	$x:=$2
+	$y:=$param1
+	$x:=$param2
 	
 	If (Count parameters=2)
 		
@@ -165,7 +179,7 @@ Function atanh($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Log((1+$value)/(1-($value)))/2
 	Else 
 		$result:=This.NaN
@@ -179,7 +193,7 @@ Function cbrt($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		
 		If ($value<0)
 			$result:=-(-$value^(1/3))  // ensure negative numbers remain negative:
@@ -199,7 +213,7 @@ Function ceil($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=-Int(-$value)
 	Else 
 		$result:=This.NaN
@@ -213,7 +227,7 @@ Function clz32($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Position("1";LongInt2BinaryString($value);1)-1
 	Else 
 		$result:=This.NaN
@@ -227,7 +241,7 @@ Function cos($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Cos($value)
 	Else 
 		$result:=This.NaN
@@ -241,7 +255,7 @@ Function cosh($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=(Exp($value)+Exp(-$value))/2
 	Else 
 		$result:=This.NaN
@@ -255,7 +269,7 @@ Function exp($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Exp($value)
 	Else 
 		$result:=This.NaN
@@ -269,7 +283,7 @@ Function expm1($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Exp($value)-1
 	Else 
 		$result:=This.NaN
@@ -283,7 +297,7 @@ Function floor($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Int($value)
 	Else 
 		$result:=This.NaN
@@ -296,7 +310,8 @@ Function hypot(... : Real) -> $return : Real
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot
 	//C_REAL($0;$result)
 	//C_REAL(${1})
-	var $result : Real
+	var $result; $sum : Real
+	var $i : Integer
 	
 	If (Count parameters>0)
 		$sum:=0
@@ -316,7 +331,7 @@ Function imul($param1 : Integer; $param2 : Integer) -> $return : Real
 	var $result : Real
 	
 	If (Count parameters=1)
-		$result:=$1*$2
+		$result:=$param1*$param2
 	Else 
 		$result:=This.NaN
 	End if 
@@ -329,7 +344,7 @@ Function log($param1 : Real) -> $return : Real
 	
 	var $result; $value : Real
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Log($value)
 	Else 
 		$result:=This.NaN
@@ -342,7 +357,7 @@ Function log10($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Log($value)*This.LOG10E
 	Else 
 		$result:=This.NaN
@@ -356,7 +371,7 @@ Function log1p($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=This.log(1+$value)
 	Else 
 		$result:=This.NaN
@@ -370,7 +385,7 @@ Function log2($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$return:=Log($value)*This.LOG2E
 	Else 
 		$result:=This.NaN
@@ -381,11 +396,11 @@ Function log2($param1 : Real) -> $return : Real
 	
 Function max($param1 : Collection) -> $return : Real
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
-	$return:=$1.max()
+	$return:=$param1.max()
 	
 Function min($param1 : Collection) -> $return : Real
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min
-	$return:=$1.min()
+	$return:=$param1.min()
 	
 	
 Function pow($param1 : Real; $param2 : Real) -> $return : Real
@@ -393,7 +408,7 @@ Function pow($param1 : Real; $param2 : Real) -> $return : Real
 	var $result : Real
 	
 	If (Count parameters=2)
-		$result:=$1^$2
+		$result:=$param1^$param2
 	Else 
 		$result:=This.NaN
 	End if 
@@ -411,7 +426,7 @@ Function round($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		If ($value<0)
 			$result:=Round($value+0.01;0)
 		Else 
@@ -430,7 +445,7 @@ Function sign($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		Case of 
 			: ($value>0)
 				$result:=1
@@ -453,7 +468,7 @@ Function sin($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Sin(($value))
 	Else 
 		$result:=This.NaN
@@ -464,10 +479,10 @@ Function sin($param1 : Real) -> $return : Real
 	
 Function sinh($param1 : Real) -> $return : Real
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sinh
-	var $result; $value : Real
+	var $result; $value; $y : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$y:=This.exp($value)
 		$result:=($y-(1/$y))/2
 	Else 
@@ -482,7 +497,7 @@ Function sqrt($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Square root($value)
 	Else 
 		$result:=This.NaN
@@ -496,7 +511,7 @@ Function tan($param1 : Real) -> $return : Real
 	var $result; $value : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$result:=Tan($value)
 	Else 
 		$result:=This.NaN
@@ -507,10 +522,10 @@ Function tan($param1 : Real) -> $return : Real
 	
 Function tanh($param1 : Real) -> $return : Real
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tanh
-	var $result; $value : Real
+	var $result; $value; $a; $b : Real
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$a:=This.exp($value)
 		$b:=This.exp(-$value)
 		$result:=($a-$b)/($a+$b)
@@ -521,15 +536,17 @@ Function tanh($param1 : Real) -> $return : Real
 	$return:=$result
 	
 Function toRadians($param1 : Real) -> $return : Real
+	var $result : Real
 	If (Count parameters=1)
-		$return:=$1*This.PI/180
+		$return:=$param1*This.PI/180
 	Else 
 		$result:=0
 	End if 
 	
 Function toDegrees($param1 : Real) -> $return : Real
+	var $result : Real
 	If (Count parameters=1)
-		$return:=$1*180/This.PI
+		$return:=$param1*180/This.PI
 	Else 
 		$result:=0
 	End if 
@@ -537,9 +554,10 @@ Function toDegrees($param1 : Real) -> $return : Real
 Function trunc($param1 : Real) -> $return : Real
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
 	var $result; $value : Real
+	var $str; $vDecSep : Text
 	
 	If (Count parameters=1)
-		$value:=$1
+		$value:=$param1
 		$str:=String($value)
 		GET SYSTEM FORMAT(Decimal separator;$vDecSep)
 		$result:=Num(Substring($str;1;Position($vDecSep;$str)-1))
@@ -620,9 +638,9 @@ Function roundDecimal($param1 : Real; $param2 : Real; $param3 : Text) -> $return
 	If (Count parameters#3)
 		$valueRounded:=This.NaN
 	Else 
-		$valueToRound:=$1
-		$precision:=$2
-		$roundType:=$3
+		$valueToRound:=$param1
+		$precision:=$param2
+		$roundType:=$param3
 		
 		If ($precision#0)
 			// $multiple is the multiple that will help to do the rounding using the 4D Round command
@@ -737,16 +755,17 @@ Function spherodistance($param1 : Real; $param2 : Real; $param3 : Real; $param4 
 	//4D_CalculateDistance (-50,81;10,35;40,98;-80,53{;6371})
 	
 	var $lat1rad; $Lon1rad; $lat2rad; $lon2rad; $dlon; $Radius; $result; $Distance; $x; $Lat1; $Lat2; $Long1; $Long2 : Real
+	var $lon1; $lon2; $dlat; $a; $c : Real
 	
 	If (Count parameters=4) | (Count parameters=5)
-		$lon1:=$1
-		$lat1:=$2
-		$lon2:=$3
-		$lat2:=$4
+		$lon1:=$param1
+		$lat1:=$param2
+		$lon2:=$param3
+		$lat2:=$param4
 		
 		// Harvesine Formula
 		If (Count parameters=5)
-			$Radius:=$5
+			$Radius:=$param5
 		Else 
 			$Radius:=6371  //6371 = earth radius
 		End if 
