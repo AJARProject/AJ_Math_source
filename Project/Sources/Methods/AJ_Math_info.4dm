@@ -8,8 +8,10 @@
 
 
 
-C_TEXT:C284($0)
+
+#DECLARE() -> $return : Text
+var $version_t : Text
 
 $version_t:="2.0.1+Build47"  // Fri, 13 Jan 2023 06:59:52 GMT
 
-$0:="AJ_Math (v19 R8) : "+$version_t
+$return:="AJ_Math (v21 R4) : "+$version_t
